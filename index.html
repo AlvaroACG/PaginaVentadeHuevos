@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pedido de Huevos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="container">
+  <h2>🥚 Pedido de Huevos</h2>
+  <p>Haz tu pedido y retíralo pagando en persona.</p>
+
+  <p>
+    <strong>Precios</strong><br>
+    • Docena (12): $2.400<br>
+    • Bandeja (30): $6.000
+  </p>
+
+  <form action="https://TU_BACKEND_URL/pedido" method="POST" id="pedidoForm">
+
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombre" required>
+
+    <label for="rut">RUT / ID</label>
+    <input id="rut" name="rut" placeholder="Ej: 12.345.678-9" required>
+    <small>Trae este ID al momento de retirar</small>
+
+    <label for="docenas">Docenas</label>
+    <input id="docenas" name="docenas" type="number" min="0" value="0">
+
+    <label for="bandejas">Bandejas (30)</label>
+    <input id="bandejas" name="bandejas" type="number" min="0" value="0">
+
+    <label>Verificación</label>
+    <p id="captcha"></p>
+    <input type="number" id="captchaInput" required>
+
+    <button type="submit">Enviar pedido</button>
+  </form>
+</div>
+
+<script>
+let a = Math.floor(Math.random() * 9) + 1;
+let b = Math.floor(Math.random() * 9) + 1;
+document.getElementById("captcha").innerText = `¿Cuánto es ${a} + ${b}?`;
+
+document.getElementById("pedidoForm").addEventListener("submit", function(e) {
+  const d = parseInt(document.getElementById("docenas").value);
+  const ba = parseInt(document.getElementById("bandejas").value);
+  const r = parseInt(document.getElementById("captchaInput").value);
+
+  if (d === 0 && ba === 0) {
+    e.preventDefault();
+    alert("Debes pedir al menos una docena o bandeja");
+    return;
+  }
+
+  if (r !== a + b) {
+    e.preventDefault();
+    alert("Captcha incorrecto");
+  }
+});
+</script>
+
+</body>
+</html>
