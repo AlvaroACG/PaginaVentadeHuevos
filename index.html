@@ -2,69 +2,134 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Pedido de Huevos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huevos de Campo</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
-<div class="container">
-  <h2>🥚 Pedido de Huevos</h2>
-  <p>Haz tu pedido y retíralo pagando en persona.</p>
+<header>
+  <h1>🥚 Huevos de Campo</h1>
 
-  <p>
-    <strong>Precios</strong><br>
-    • Docena (12): $2.400<br>
-    • Bandeja (30): $6.000
-  </p>
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#pedido">Pedido</a>
+    <a href="#admin">Admin</a>
+  </nav>
 
-<form action="https://paginaventadehuevos.onrender.com/pedido" method="POST">
+  <div class="header-actions">
+    <button onclick="toggleDark()">🌙</button>
+    <div class="cart-icon" onclick="toggleCart()">
+      🛒 <span id="cartCount">0</span>
+    </div>
+  </div>
+</header>
 
-    <label for="nombre">Nombre</label>
-    <input id="nombre" name="nombre" required>
+<section class="hero">
+  <h2>Huevos frescos directo del campo</h2>
+  <p>Calidad natural y producción local</p>
+</section>
 
-    <label for="rut">RUT / ID</label>
-    <input id="rut" name="rut" placeholder="Ej: 12.345.678-9" required>
-    <small>Trae este ID al momento de retirar</small>
+<section id="pedido" class="card">
+  <h3>Agregar al Carrito</h3>
 
-    <label for="docenas">Docenas</label>
-    <input id="docenas" name="docenas" type="number" min="0" value="0">
+  <label>Nombre</label>
+  <input type="text" id="nombre">
 
-    <label for="bandejas">Bandejas (30)</label>
-    <input id="bandejas" name="bandejas" type="number" min="0" value="0">
+  <label>Cantidad (maples)</label>
+  <input type="number" id="cantidad">
 
-    <label>Verificación</label>
-    <p id="captcha"></p>
-    <input type="number" id="captchaInput" required>
+  <button onclick="addToCart()">Agregar</button>
+</section>
 
-    <button type="submit">Enviar pedido</button>
-  </form>
+<section id="admin" class="card">
+  <h3>Pedidos Recibidos (Local)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Cantidad</th>
+      </tr>
+    </thead>
+    <tbody id="adminTable"></tbody>
+  </table>
+</section>
+
+<!-- CARRITO -->
+<div id="cartPanel" class="cart-panel">
+  <h3>Carrito</h3>
+  <div id="cartItems"></div>
+  <button onclick="sendWhatsApp()">Confirmar por WhatsApp</button>
 </div>
 
+<footer>
+  © 2026 Huevos de Campo
+</footer>
+
 <script>
-let a = Math.floor(Math.random() * 9) + 1;
-let b = Math.floor(Math.random() * 9) + 1;
-document.getElementById("captcha").innerText = `¿Cuánto es ${a} + ${b}?`;
+let cart = [];
+let orderId = 1;
 
-document.getElementById("pedidoForm").addEventListener("submit", function(e) {
-  const d = parseInt(document.getElementById("docenas").value);
-  const ba = parseInt(document.getElementById("bandejas").value);
-  const r = parseInt(document.getElementById("captchaInput").value);
+function addToCart() {
+  const nombre = document.getElementById("nombre").value;
+  const cantidad = document.getElementById("cantidad").value;
 
-  if (d === 0 && ba === 0) {
-    e.preventDefault();
-    alert("Debes pedir al menos una docena o bandeja");
-    return;
-  }
+  if (!nombre || !cantidad) return alert("Completa los campos");
 
-  if (r !== a + b) {
-    e.preventDefault();
-    alert("Captcha incorrecto");
-  }
-});
+  const pedido = {
+    id: orderId++,
+    nombre,
+    cantidad
+  };
+
+  cart.push(pedido);
+  updateCart();
+  updateAdmin(pedido);
+}
+
+function updateCart() {
+  const cartItems = document.getElementById("cartItems");
+  const cartCount = document.getElementById("cartCount");
+
+  cartItems.innerHTML = "";
+  cart.forEach(p => {
+    cartItems.innerHTML += `<p>#${p.id} - ${p.nombre} (${p.cantidad} maples)</p>`;
+  });
+
+  cartCount.textContent = cart.length;
+}
+
+function toggleCart() {
+  document.getElementById("cartPanel").classList.toggle("active");
+}
+
+function sendWhatsApp() {
+  let mensaje = "Pedido:%0A";
+  cart.forEach(p => {
+    mensaje += `#${p.id} ${p.nombre} - ${p.cantidad} maples%0A`;
+  });
+
+  const numero = "56900000000"; // REEMPLAZA ESTE NUMERO
+  window.open(`https://wa.me/${numero}?text=${mensaje}`, "_blank");
+}
+
+function updateAdmin(pedido) {
+  const table = document.getElementById("adminTable");
+  table.innerHTML += `
+    <tr>
+      <td>${pedido.id}</td>
+      <td>${pedido.nombre}</td>
+      <td>${pedido.cantidad}</td>
+    </tr>
+  `;
+}
+
+function toggleDark() {
+  document.body.classList.toggle("dark");
+}
 </script>
 
 </body>
 </html>
-
 
