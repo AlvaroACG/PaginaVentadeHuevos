@@ -1,7 +1,6 @@
 {
   "name": "venta-huevos",
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
@@ -10,3 +9,4 @@
     "mysql2": "^3.9.0"
   }
 }
+
