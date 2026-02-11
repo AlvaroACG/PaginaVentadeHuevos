@@ -150,3 +150,29 @@ footer {
     margin: 15px;
   }
 }
+/* CONTENEDOR PRINCIPAL */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Para que no se estire todo */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    background: #f5f1e6;
+    padding: 15px 0;
+}
+
+/* Secciones */
+section {
+    margin: 40px 0;
+}
+
+
