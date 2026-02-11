@@ -1,40 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f7f3e8;
+  font-family: system-ui, sans-serif;
+  background: #f4efe6;
   color: #333;
-  transition: 0.3s;
 }
 
-.dark {
-  background: #1e1e1e;
-  color: #eee;
-}
-
-.navbar {
-  background: #d8c3a5;
-  padding: 15px 0;
-}
-
-.nav-container {
-  max-width: 1100px;
+.wrapper {
+  max-width: 900px;
   margin: auto;
+  padding: 20px;
+}
+
+header {
+  background: #8d6e63;
+  color: white;
+}
+
+.nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.navbar a {
-  margin-left: 20px;
+.links a {
+  color: white;
   text-decoration: none;
-  color: #333;
-  font-weight: bold;
-}
-
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
+  margin-left: 20px;
+  font-weight: 500;
 }
 
 .hero {
@@ -42,54 +38,54 @@ body {
   margin: 40px 0;
 }
 
-.form-card {
+.card {
   background: white;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+form {
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
 
-.dark .form-card {
-  background: #2a2a2a;
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
 
-.form-card label {
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-.form-card input {
+input {
   padding: 10px;
-  margin-top: 5px;
   border-radius: 8px;
   border: 1px solid #ccc;
+  width: 100%;
 }
 
-.total-box {
-  margin-top: 20px;
-  font-size: 18px;
+.total {
   font-weight: bold;
+  font-size: 18px;
 }
 
-.btn-primary {
-  margin-top: 20px;
+button {
   padding: 12px;
-  background: #6b8e23;
+  background: #6d4c41;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 16px;
 }
 
-.btn-primary:hover {
-  background: #556b2f;
+button:hover {
+  background: #5d4037;
 }
 
-.contacto {
+.center {
   text-align: center;
-  margin: 60px 0;
 }
 
 .whatsapp {
@@ -105,17 +101,18 @@ body {
 footer {
   text-align: center;
   padding: 20px;
-  background: #d8c3a5;
-  margin-top: 40px;
+  background: #8d6e63;
+  color: white;
 }
 
 @media (max-width: 768px) {
-  .nav-container {
-    flex-direction: column;
+  .grid {
+    grid-template-columns: 1fr;
   }
 
-  .navbar a {
-    margin: 10px 0;
+  .nav {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 
