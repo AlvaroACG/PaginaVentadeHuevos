@@ -13,3 +13,11 @@ app.listen(PORT, () => {
   console.log("Servidor activo en puerto " + PORT);
 });
 
+const path = require("path");
+
+app.use(express.static(__dirname));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
