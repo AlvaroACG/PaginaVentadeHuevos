@@ -8,86 +8,82 @@
 </head>
 <body>
 
-<header class="navbar">
-  <div class="nav-container">
+<header>
+  <div class="wrapper nav">
     <h1>🥚 Huevos de Campo</h1>
-    <nav>
+    <div class="links">
       <a href="#pedido">Pedido</a>
       <a href="#contacto">Contacto</a>
-      <button onclick="toggleDarkMode()">🌙</button>
-    </nav>
+    </div>
   </div>
 </header>
 
-<div class="container">
+<main class="wrapper">
 
-<section class="hero">
-  <h2>Huevos frescos directo del campo</h2>
-  <p>$200 cada huevo</p>
-</section>
+  <section class="hero">
+    <h2>Huevos frescos directo del campo</h2>
+    <p>$200 por unidad</p>
+  </section>
 
-<section id="pedido">
-  <h2>Hacer Pedido</h2>
+  <section id="pedido" class="card">
+    <h2>Realizar Pedido</h2>
 
-  <form action="https://paginaventadehuevos.onrender.com/" method="POST" class="form-card">
+    <form action="https://TU_BACKEND_URL/pedido" method="POST">
 
-    <label>Nombre</label>
-    <input type="text" name="nombre" required>
+      <input type="text" name="nombre" placeholder="Tu nombre" required>
 
-    <label>Docenas ($2.400)</label>
-    <input type="number" name="docenas" min="0" value="0" id="docenas">
+      <div class="grid">
+        <div>
+          <label>Docenas ($2.400)</label>
+          <input type="number" name="docenas" min="0" value="0" id="docenas">
+        </div>
 
-    <label>Bandejas (30 huevos - $6.000)</label>
-    <input type="number" name="bandejas" min="0" value="0" id="bandejas">
+        <div>
+          <label>Bandejas (30 - $6.000)</label>
+          <input type="number" name="bandejas" min="0" value="0" id="bandejas">
+        </div>
+      </div>
 
-    <div class="total-box">
-      Total: $<span id="total">0</span>
-    </div>
+      <div class="total">
+        Total: $<span id="total">0</span>
+      </div>
 
-    <label class="captcha">
-      <input type="checkbox" required>
-      No soy un robot
-    </label>
+      <label class="check">
+        <input type="checkbox" required>
+        Confirmo que no soy un robot
+      </label>
 
-    <button type="submit" class="btn-primary">Enviar Pedido</button>
+      <button type="submit">Enviar Pedido</button>
 
-  </form>
-</section>
+    </form>
+  </section>
 
-<section id="contacto" class="contacto">
-  <h2>Contacto</h2>
-  <a href="https://wa.me/56900000000" target="_blank" class="whatsapp">
-    WhatsApp Directo
-  </a>
-</section>
+  <section id="contacto" class="card center">
+    <h2>Contacto</h2>
+    <a class="whatsapp" href="https://wa.me/56900000000" target="_blank">
+      WhatsApp
+    </a>
+  </section>
 
-</div>
+</main>
 
 <footer>
   © 2026 Huevos de Campo
 </footer>
 
 <script>
-const docenasInput = document.getElementById("docenas");
-const bandejasInput = document.getElementById("bandejas");
-const totalSpan = document.getElementById("total");
+const d = document.getElementById("docenas");
+const b = document.getElementById("bandejas");
+const t = document.getElementById("total");
 
-function calcularTotal() {
-  const docenas = parseInt(docenasInput.value) || 0;
-  const bandejas = parseInt(bandejasInput.value) || 0;
-
-  const total = (docenas * 2400) + (bandejas * 6000);
-  totalSpan.textContent = total;
+function calcular() {
+  const total = (parseInt(d.value)||0)*2400 + (parseInt(b.value)||0)*6000;
+  t.textContent = total;
 }
 
-docenasInput.addEventListener("input", calcularTotal);
-bandejasInput.addEventListener("input", calcularTotal);
-
-function toggleDarkMode() {
-  document.body.classList.toggle("dark");
-}
+d.addEventListener("input", calcular);
+b.addEventListener("input", calcular);
 </script>
 
 </body>
 </html>
-
