@@ -200,84 +200,59 @@ body {
   }
 }
 
-/* Selector de cantidad - estilo triangular */
-.quantity-selector {
+.quantity-wrap {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 0;
 }
 
-.qty-btn {
-  width: 32px;
-  height: 32px;
-  background: #4a6fa5;
+.qty-down, .qty-up {
+  width: 28px;
+  height: 28px;
+  background: #4CAF50;
   color: white;
   border: none;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  padding: 0;
   line-height: 1;
+  transition: background 0.2s;
 }
 
-/* Forma de triángulo (izquierdo) */
-.qty-btn:first-of-type {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 50% 20%);
-  border-radius: 6px 0 0 6px;
+.qty-down {
+  border-radius: 4px 0 0 4px;
 }
 
-/* Forma de triángulo (derecho) */
-.qty-btn:last-of-type {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 50% 80%);
-  border-radius: 0 6px 6px 0;
+.qty-up {
+  border-radius: 0 4px 4px 0;
 }
 
-.qty-btn:hover {
-  background: #2c3e50;
+.qty-down:hover, .qty-up:hover {
+  background: #45a049;
 }
 
-.qty-input {
-  width: 50px;
-  height: 32px;
+.qty-field {
+  width: 40px;
+  height: 28px;
   text-align: center;
   border: 1px solid #ddd;
-  border-radius: 0;
-  font-size: 16px;
+  border-left: none;
+  border-right: none;
+  font-size: 14px;
   font-weight: 600;
   color: #333;
-  margin: 0;
+  padding: 0;
   -moz-appearance: textfield;
 }
 
-.qty-input::-webkit-outer-spin-button,
-.qty-input::-webkit-inner-spin-button {
+.qty-field::-webkit-outer-spin-button,
+.qty-field::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-/* Para que el label y el selector estén en línea */
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-}
-
-/* Ajuste responsive */
-@media (max-width: 480px) {
-  .qty-btn {
-    width: 28px;
-    height: 28px;
-  }
-  .qty-input {
-    width: 45px;
-    height: 28px;
-  }
-}
-
-
-
 
 
