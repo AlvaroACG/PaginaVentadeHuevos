@@ -3,218 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Realizar Pedido | Huevos de Campo</title>
-
-<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-
-<style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f5f3ef;
-}
-
-header{
-  background:#6d4c41;
-  color:white;
-  padding:15px;
-  text-align:center;
-}
-
-.container{
-  max-width:600px;
-  margin:40px auto;
-  background:white;
-  padding:30px;
-  border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-}
-
-h2{
-  margin-top:0;
-  text-align:center;
-}
-
-label{
-  display:block;
-  margin-top:15px;
-  font-weight:bold;
-}
-
-input, textarea, select{
-  width:100%;
-  padding:10px;
-  margin-top:5px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  box-sizing:border-box;
-}
-
-.quantity-box{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:10px;
-}
-
-.quantity-box button{
-  width:35px;
-  height:35px;
-  border:none;
-  background:#6d4c41;
-  color:white;
-  font-size:18px;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-.quantity-box input{
-  width:60px;
-  text-align:center;
-}
-
-.total{
-  margin-top:20px;
-  font-size:18px;
-  font-weight:bold;
-  text-align:right;
-}
-
-button[type="submit"]{
-  margin-top:20px;
-  width:100%;
-  padding:12px;
-  background:#4caf50;
-  border:none;
-  color:white;
-  font-size:16px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-button[type="submit"]:hover{
-  opacity:0.9;
-}
-
-@media(max-width:600px){
-  .container{
-    margin:20px;
-    padding:20px;
-  }
-}
-</style>
+<title>Hacer Pedido</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
-
 <body>
-<nav class="navbar">
-  <div class="navbar-container">
 
-    <div class="navbar-logo">
-      <a href="index.html">🐔 Huevos del Campo</a>
+<div id="navbar-container"></div>
+
+<section class="form-card">
+  <h2>Realizar Pedido 🥚</h2>
+
+  <form action="/pedido" method="POST">
+
+    <input type="text" name="nombre" placeholder="Nombre completo" required>
+    <input type="tel" name="telefono" placeholder="Teléfono" required>
+    <input type="text" name="direccion" placeholder="Dirección o referencia" required>
+
+    <label>Docenas ($2400)</label>
+    <div class="qty-control">
+      <button type="button" onclick="changeQty('docenas', -1)">-</button>
+      <input type="number" id="docenas" name="docenas" value="0" min="0">
+      <button type="button" onclick="changeQty('docenas', 1)">+</button>
     </div>
 
-    <button class="navbar-toggle" id="navbar-toggle">
-      ☰
-    </button>
+    <label>Bandejas (30 huevos) ($6000)</label>
+    <div class="qty-control">
+      <button type="button" onclick="changeQty('bandejas', -1)">-</button>
+      <input type="number" id="bandejas" name="bandejas" value="0" min="0">
+      <button type="button" onclick="changeQty('bandejas', 1)">+</button>
+    </div>
 
-    <ul class="navbar-menu" id="navbar-menu">
-      <li class="navbar-item">
-        <a href="index.html" class="navbar-link">Inicio</a>
-      </li>
-      <li class="navbar-item">
-        <a href="pedido.html" class="navbar-link">Hacer Pedido</a>
-      </li>
-      <li class="navbar-item">
-        <a href="#" class="navbar-link">Contacto</a>
-      </li>
-    </ul>
+    <h3>Total: $<span id="total">0</span></h3>
 
-  </div>
-</nav>
+    <!-- Cloudflare Turnstile -->
+    <div class="cf-turnstile" data-sitekey="TU_SITE_KEY_AQUI"></div>
 
-<header>
-  <h1>Envianos tu pedido y retira con tu RUT</h1>
-</header>
+    <button type="submit" class="btn-primary">Confirmar Pedido</button>
 
-<div class="container">
-
-<h2>Formulario de Pedido</h2>
-
-<form action="/pedido" method="POST">
-
-<label>Nombre Completo</label>
-<input type="text" name="nombre" required>
-
-<label>Teléfono</label>
-<input type="tel" name="telefono" required>
-
-<label>Correo Electrónico</label>
-<input type="email" name="correo" required>
-
-<label>Dirección de Entrega</label>
-<textarea name="direccion" required></textarea>
-
-<label>Docenas ($2.400 c/u)</label>
-<div class="quantity-box">
-  <button type="button" onclick="cambiarCantidad('docenas', -1)">−</button>
-  <input type="number" id="docenas" name="docenas" value="0" min="0">
-  <button type="button" onclick="cambiarCantidad('docenas', 1)">+</button>
-</div>
-
-<label>Bandejas ($6.000 c/u)</label>
-<div class="quantity-box">
-  <button type="button" onclick="cambiarCantidad('bandejas', -1)">−</button>
-  <input type="number" id="bandejas" name="bandejas" value="0" min="0">
-  <button type="button" onclick="cambiarCantidad('bandejas', 1)">+</button>
-</div>
-
-<div class="total">
-Total: $<span id="total">0</span>
-</div>
-
-<br>
-
-<div class="h-captcha" data-sitekey="TU_SITE_KEY_AQUI"></div>
-
-<button type="submit">Enviar Pedido</button>
-
-</form>
-
-</div>
+  </form>
+</section>
 
 <script>
-const precioDocena = 2400;
-const precioBandeja = 6000;
-
-function cambiarCantidad(id, cambio){
+function changeQty(id, amount) {
   const input = document.getElementById(id);
-  let valor = parseInt(input.value) || 0;
-  valor += cambio;
-  if(valor < 0) valor = 0;
-  input.value = valor;
-  calcularTotal();
+  let value = parseInt(input.value) || 0;
+  value += amount;
+  if (value < 0) value = 0;
+  input.value = value;
+  calcular();
 }
 
-function calcularTotal(){
-  const docenas = parseInt(document.getElementById("docenas").value) || 0;
-  const bandejas = parseInt(document.getElementById("bandejas").value) || 0;
-  const total = (docenas * precioDocena) + (bandejas * precioBandeja);
+function calcular() {
+  const doc = parseInt(document.getElementById("docenas").value) || 0;
+  const ban = parseInt(document.getElementById("bandejas").value) || 0;
+  const total = (doc * 2400) + (ban * 6000);
   document.getElementById("total").textContent = total;
 }
 
-document.getElementById("docenas").addEventListener("input", calcularTotal);
-document.getElementById("bandejas").addEventListener("input", calcularTotal);
+document.getElementById("docenas").addEventListener("input", calcular);
+document.getElementById("bandejas").addEventListener("input", calcular);
 </script>
 
 <script>
-const toggle = document.getElementById("navbar-toggle");
-const menu = document.getElementById("navbar-menu");
-
-toggle.addEventListener("click", () => {
-  menu.classList.toggle("active");
-});
+fetch("navbar.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("navbar-container").innerHTML = data;
+  });
 </script>
-
 
 </body>
 </html>
+
