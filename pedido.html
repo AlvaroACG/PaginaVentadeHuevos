@@ -33,25 +33,24 @@
     <h3>🥚 PRODUCTOS SOLICITADOS</h3>
     
     <label>📦 Docenas ($2400)</label>
-    <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
-      <span style="font-weight: 500;">Cantidad:</span>
-      <div class="quantity-selector">
-        <button type="button" onclick="changeQty('docenas', -1)" class="qty-btn">▼</button>
-        <input type="number" id="docenas" name="docenas" value="0" min="0" class="qty-input">
-        <button type="button" onclick="changeQty('docenas', 1)" class="qty-btn">▲</button>
+    <div style="display: flex; align-items: center; justify-content: flex-end;">
+      <span style="font-weight: 500; margin-right: 10px;">Cantidad:</span>
+      <div class="quantity-wrap">
+        <button type="button" onclick="changeQty('docenas', -1)" class="qty-down">▼</button>
+        <input type="number" id="docenas" name="docenas" value="0" min="0" class="qty-field">
+        <button type="button" onclick="changeQty('docenas', 1)" class="qty-up">▲</button>
       </div>
     </div>
     
     <label>📦 Bandejas (30 huevos) ($6000)</label>
-    <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
-      <span style="font-weight: 500;">Cantidad:</span>
-      <div class="quantity-selector">
-        <button type="button" onclick="changeQty('bandejas', -1)" class="qty-btn">▼</button>
-        <input type="number" id="bandejas" name="bandejas" value="0" min="0" class="qty-input">
-        <button type="button" onclick="changeQty('bandejas', 1)" class="qty-btn">▲</button>
+    <div style="display: flex; align-items: center; justify-content: flex-end;">
+      <span style="font-weight: 500; margin-right: 10px;">Cantidad:</span>
+      <div class="quantity-wrap">
+        <button type="button" onclick="changeQty('bandejas', -1)" class="qty-down">▼</button>
+        <input type="number" id="bandejas" name="bandejas" value="0" min="0" class="qty-field">
+        <button type="button" onclick="changeQty('bandejas', 1)" class="qty-up">▲</button>
       </div>
     </div>
-    
     <!-- ===== TOTAL (se envía automático) ===== -->
     <h3>💰 TOTAL: $<span id="total">0</span></h3>
     <input type="hidden" name="💰 MONTO TOTAL" id="total-input">
