@@ -36,11 +36,13 @@
         <div>
           <label>Docenas ($2.400)</label>
           <input type="number" name="docenas" min="0" value="0" id="docenas">
+          <button type="button" onclick="addToCart()">Agregar al carrito</button>
         </div>
 
         <div>
           <label>Bandejas (30 - $6.000)</label>
           <input type="number" name="bandejas" min="0" value="0" id="bandejas">
+          <button type="button" onclick="addToCart()">Agregar al carrito</button>
         </div>
       </div>
 
@@ -83,10 +85,73 @@ function calcular() {
 
 d.addEventListener("input", calcular);
 b.addEventListener("input", calcular);
+let cart = [];
+
+function addToCart() {
+  const docenas = parseInt(document.getElementById("docenas").value) || 0;
+  const bandejas = parseInt(document.getElementById("bandejas").value) || 0;
+
+  if (docenas === 0 && bandejas === 0) return;
+
+  let total = (docenas * 2400) + (bandejas * 6000);
+
+  cart.push({ docenas, bandejas, total });
+
+  updateCart();
+}
+
+function updateCart() {
+  const container = document.getElementById("cart-items");
+  const count = document.getElementById("cart-count");
+  const totalSpan = document.getElementById("cart-total");
+
+  container.innerHTML = "";
+
+  let totalGeneral = 0;
+
+  cart.forEach((item, index) => {
+    totalGeneral += item.total;
+
+    container.innerHTML += `
+      <div>
+        Docenas: ${item.docenas} |
+        Bandejas: ${item.bandejas}
+      </div>
+    `;
+  });
+
+  count.textContent = cart.length;
+  totalSpan.textContent = totalGeneral;
+}
+
+function toggleCart() {
+  document.getElementById("cart").classList.toggle("open");
+}
 </script>
 
+
 </body>
+  <!-- BOTÓN CARRITO -->
+<div class="cart-icon" onclick="toggleCart()">
+  🛒 <span id="cart-count">0</span>
+</div>
+
+<!-- PANEL CARRITO -->
+<div class="cart-panel" id="cart">
+  <div class="cart-header">
+    <h3>Tu Carrito</h3>
+    <button onclick="toggleCart()">➖</button>
+  </div>
+
+  <div id="cart-items"></div>
+
+  <div class="cart-total">
+    Total: $<span id="cart-total">0</span>
+  </div>
+</div>
+
 </html>
+
 
 
 
