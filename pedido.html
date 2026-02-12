@@ -66,6 +66,23 @@
   </form>
 
 <script>
+document.getElementById('pedidoForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  // ✅ VALIDAR TURNSTILE - ESTO ES LO QUE FALTABA
+  const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
+  
+  if (!turnstileResponse) {
+    alert('❌ Por favor, completa el captcha');
+    return;
+  }
+  
+  // El resto de tu código de envío...
+  // (validar productos, enviar, mostrar modal, etc)
+  
+});
+</script>
+<script>
 // Calcular total
 function changeQty(id, delta) {
   const input = document.getElementById(id);
