@@ -32,18 +32,24 @@
     <!-- ===== PRODUCTOS ===== -->
     <h3>🥚 PRODUCTOS SOLICITADOS</h3>
     
-    <label>📦 DOCENAS (30 huevos) - $2.400 c/u</label>
-    <div class="qty-control">
-      <button type="button" onclick="changeQty('docenas', -1)">-</button>
-      <input type="number" id="docenas" name="🥚 DOCENAS (30 huevos)" value="0" min="0">
-      <button type="button" onclick="changeQty('docenas', 1)">+</button>
+    <label>📦 Docenas ($2400)</label>
+    <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
+      <span style="font-weight: 500;">Cantidad:</span>
+      <div class="quantity-selector">
+        <button type="button" onclick="changeQty('docenas', -1)" class="qty-btn">▼</button>
+        <input type="number" id="docenas" name="docenas" value="0" min="0" class="qty-input">
+        <button type="button" onclick="changeQty('docenas', 1)" class="qty-btn">▲</button>
+      </div>
     </div>
     
-    <label>📦 BANDEJAS (30 huevos) - $6.000 c/u</label>
-    <div class="qty-control">
-      <button type="button" onclick="changeQty('bandejas', -1)">-</button>
-      <input type="number" id="bandejas" name="📦 BANDEJAS (30 huevos)" value="0" min="0">
-      <button type="button" onclick="changeQty('bandejas', 1)">+</button>
+    <label>📦 Bandejas (30 huevos) ($6000)</label>
+    <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
+      <span style="font-weight: 500;">Cantidad:</span>
+      <div class="quantity-selector">
+        <button type="button" onclick="changeQty('bandejas', -1)" class="qty-btn">▼</button>
+        <input type="number" id="bandejas" name="bandejas" value="0" min="0" class="qty-input">
+        <button type="button" onclick="changeQty('bandejas', 1)" class="qty-btn">▲</button>
+      </div>
     </div>
     
     <!-- ===== TOTAL (se envía automático) ===== -->
