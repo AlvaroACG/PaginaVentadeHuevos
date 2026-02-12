@@ -1,68 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Huevos Don Álvaro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huevos del Campo</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="navbar">
-  <div class="logo">🥚 Huevos Don Álvaro</div>
-  <nav>
-    <a href="/">Inicio</a>
-    <a href="pedido.html">Hacer Pedido</a>
-    <a href="#">Nosotros</a>
-    <a href="#">Contacto</a>
-  </nav>
-</header>
+<div id="navbar-container"></div>
 
-<main>
+<!-- TARJETA PRINCIPAL -->
+<section class="hero-card">
+  <h1>Huevos Frescos del Campo 🥚</h1>
+  <p>Producción local, gallinas criadas de forma tradicional y precios justos.</p>
+  <a href="pedido.html" class="btn-primary">Hacer Pedido</a>
+</section>
 
-  <!-- Tarjeta principal -->
-  <section class="hero">
-    <div class="card main-card">
-      <h1>Huevos frescos del campo a tu mesa</h1>
-      <p>
-        Venta directa de huevos frescos, seleccionados y distribuidos con calidad.
-        Precios justos, atención cercana y entregas responsables.
-      </p>
-      <a href="pedido.html" class="btn-primary">Realizar Pedido</a>
-    </div>
-  </section>
+<!-- SECCIÓN DE 3 TARJETAS -->
+<section class="info-section">
 
-  <!-- Sección de 3 tarjetas -->
-  <section class="features">
+  <div class="info-card">
+    <h3>Producción Natural</h3>
+    <p>Alimentación balanceada y cuidado responsable.</p>
+  </div>
 
-    <div class="card feature-card">
-      <h3>🌿 Producción Natural</h3>
-      <p>Huevos seleccionados con estándares de calidad y frescura.</p>
-      <a href="#" class="card-link">Ver más</a>
-    </div>
+  <div class="info-card">
+    <h3>Pedidos Organizados</h3>
+    <p>Recoge tu pedido con tu número de orden.</p>
+  </div>
 
-    <div class="card feature-card">
-      <h3>🚚 Entregas Rápidas</h3>
-      <p>Coordinamos entregas eficientes y responsables.</p>
-      <a href="#" class="card-link">Ver más</a>
-    </div>
+  <div class="info-card">
+    <h3>Próximamente</h3>
+    <p>Nuevos productos del campo y promociones.</p>
+  </div>
 
-    <div class="card feature-card">
-      <h3>📦 Compra Mayorista</h3>
-      <p>Opciones especiales para negocios y revendedores.</p>
-      <a href="#" class="card-link">Ver más</a>
-    </div>
+</section>
 
-  </section>
-
-</main>
-
-<footer class="footer">
-  <p>© 2026 Huevos Don Álvaro - Todos los derechos reservados</p>
-</footer>
+<script>
+fetch("navbar.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("navbar-container").innerHTML = data;
+  });
+</script>
 
 </body>
 </html>
+
 
 
 
