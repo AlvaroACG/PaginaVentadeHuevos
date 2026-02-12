@@ -14,141 +14,71 @@
 <section class="form-card">
   <h2>Realizar Pedido 🥚</h2>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-  <form action="https://formsubmit.co/acarvita@gmail.com" method="POST">
+  <form action="https://formsubmit.co/TU_EMAIL@GMAIL.COM" method="POST" id="pedidoForm">
   
-  <!-- ===== CONFIGURACIÓN DEL CORREO ===== -->
-    <input type="hidden" name="_subject" value="🥚 NUEVO PEDIDO - HUEVOS FRESCOS 🥚">
+    <!-- CONFIGURACIÓN FORMSUBMIT -->
+    <input type="hidden" name="_subject" value="🛒 NUEVO PEDIDO DE HUEVOS">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_next" value="https://tusitio.com/gracias.html">
-    <input type="hidden" name="_autoresponse" value="✅ ¡Gracias por tu pedido! Te llamaremos para confirmar la entrega. Horario de atención: Lunes a Sábado 9:00-18:00 hrs.">
+    <input type="hidden" name="_next" value="">
+    <input type="hidden" name="_autoresponse" value="✅ Gracias por tu pedido. Te contactaremos pronto.">
     
-    <!-- ===== DATOS DEL CLIENTE ===== -->
-    <h3>📋 INFORMACIÓN DE CONTACTO</h3>
-    <input type="text" name="👤 NOMBRE COMPLETO" placeholder="Ej: María González" required>
-    <input type="tel" name="📱 TELÉFONO / WHATSAPP" placeholder="Ej: +56 9 1234 5678" required>
-    <input type="text" name="📍 DIRECCIÓN DE ENTREGA" placeholder="Calle, número, referencia" required>
-    
-    <!-- ===== PRODUCTOS ===== -->
-    <h3>🥚 PRODUCTOS SOLICITADOS</h3>
-    
-    <label>📦 Docenas ($2400)</label>
+    <!-- TUS CAMPOS -->
+    <input type="text" name="👤 Nombre completo" placeholder="Nombre completo" required>
+    <input type="tel" name="📱 Teléfono" placeholder="Teléfono" required>
+    <input type="text" name="📍 Dirección" placeholder="Dirección o referencia" required>
+  
+    <!-- DOCENAS -->
+    <label>Docenas ($2400)</label>
     <div style="display: flex; align-items: center; justify-content: flex-end;">
       <span style="font-weight: 500; margin-right: 10px;">Cantidad:</span>
       <div class="quantity-wrap">
         <button type="button" onclick="changeQty('docenas', -1)" class="qty-down">▼</button>
-        <input type="number" id="docenas" name="docenas" value="0" min="0" class="qty-field">
+        <input type="number" id="docenas" name="🥚 Docenas" value="0" min="0" class="qty-field">
         <button type="button" onclick="changeQty('docenas', 1)" class="qty-up">▲</button>
       </div>
     </div>
-    
-    <label>📦 Bandejas (30 huevos) ($6000)</label>
+  
+    <!-- BANDEJAS -->
+    <label>Bandejas (30 huevos) ($6000)</label>
     <div style="display: flex; align-items: center; justify-content: flex-end;">
       <span style="font-weight: 500; margin-right: 10px;">Cantidad:</span>
       <div class="quantity-wrap">
         <button type="button" onclick="changeQty('bandejas', -1)" class="qty-down">▼</button>
-        <input type="number" id="bandejas" name="bandejas" value="0" min="0" class="qty-field">
+        <input type="number" id="bandejas" name="📦 Bandejas" value="0" min="0" class="qty-field">
         <button type="button" onclick="changeQty('bandejas', 1)" class="qty-up">▲</button>
       </div>
     </div>
-    <!-- ===== TOTAL (se envía automático) ===== -->
-    <h3>💰 TOTAL: $<span id="total">0</span></h3>
-    <input type="hidden" name="💰 MONTO TOTAL" id="total-input">
+  
+    <!-- TOTAL -->
+    <h3>Total: $<span id="total">0</span></h3>
+    <input type="hidden" name="💰 Total" id="total-hidden">
+  
+    <!-- CLOUDFLARE TURNSTILE -->
+    <div class="cf-turnstile" data-sitekey="TU_SITE_KEY_AQUI" style="margin: 20px 0;"></div>
     
-    <!-- ===== FECHA Y HORA (automático) ===== -->
-    <input type="hidden" name="🕐 FECHA DEL PEDIDO" id="fecha-input">
-    <input type="hidden" name="🌐 PÁGINA" value="Formulario Web">
-    
-    <!-- Cloudflare Turnstile -->
-    <div class="cf-turnstile" data-sitekey="0x4AAAAAACa7hVhkSs0CD7Cv"></div>
-    
-    <button type="submit" class="btn-primary">✅ CONFIRMAR PEDIDO</button>
+    <!-- BOTÓN -->
+    <button type="submit" class="btn-primary" id="btnSubmit">Confirmar Pedido</button>
   </form>
 
-<script>
-document.querySelector('form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  // 1. VALIDAR CAPTCHA (ESTO NUEVO)
-  const captchaToken = document.querySelector('[name="cf-turnstile-response"]')?.value;
-  if (!captchaToken) {
-    alert('❌ Por favor, completa el captcha');
-    return;
-  }
-  
-  // 2. VALIDAR PRODUCTOS
-  const docenas = parseInt(document.getElementById('docenas').value) || 0;
-  const bandejas = parseInt(document.getElementById('bandejas').value) || 0;
-  if (docenas === 0 && bandejas === 0) {
-    alert('❌ Debes pedir al menos un producto');
-    return;
-  }
-  
-  // 3. ENVIAR
-  try {
-    const response = await fetch(this.action, {
-      method: 'POST',
-      body: new FormData(this)
-    });
-    
-    if (response.ok) {
-      mostrarConfirmacion();
-      this.reset();
-      document.getElementById('docenas').value = 0;
-      document.getElementById('bandejas').value = 0;
-      calcular();
-      
-      // 4. RESETEAR CAPTCHA
-      if (window.turnstile) {
-        turnstile.reset();
-      }
-    }
-  } catch (error) {
-    alert('❌ Error al enviar');
-  }
-});
-</script>
-<script>
-// Calcular total
-function changeQty(id, delta) {
-  const input = document.getElementById(id);
-  let val = parseInt(input.value) || 0;
-  val = Math.max(0, val + delta);
-  input.value = val;
-  calcularTotal();
-}
+<!-- MODAL DE CONFIRMACIÓN -->
+<div id="pedidoConfirmado" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 30px rgba(0,0,0,0.2); text-align: center; z-index: 1000; max-width: 400px;">
+  <h3 style="margin-top: 0; color: #2e7d32;">✅ ¡Pedido confirmado!</h3>
+  <p style="margin-bottom: 25px;">Tu pedido ha sido enviado correctamente. Te contactaremos pronto.</p>
+  <div style="display: flex; gap: 15px; justify-content: center;">
+    <button onclick="nuevoPedido()" style="background: #4CAF50; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold;">📦 Nuevo pedido</button>
+    <button onclick="cerrarModal()" style="background: #f5f5f5; color: #333; border: 1px solid #ddd; padding: 12px 25px; border-radius: 8px; cursor: pointer;">OK</button>
+  </div>
+</div>
 
-function calcularTotal() {
-  const doc = parseInt(document.getElementById('docenas').value) || 0;
-  const ban = parseInt(document.getElementById('bandejas').value) || 0;
-  const total = (doc * 2400) + (ban * 6000);
-  document.getElementById('total').textContent = total;
-  document.getElementById('total-input').value = '$' + total.toLocaleString('es-CL');
-}
-
-// Antes de enviar
-document.querySelector('form').addEventListener('submit', function() {
-  // Fecha actual
-  const ahora = new Date();
-  const fecha = ahora.toLocaleString('es-CL', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-  document.getElementById('fecha-input').value = fecha;
-  
-  // Total
-  calcularTotal();
-});
-
-// Inicializar
-calcularTotal();
-</script>
-</section>
+<!-- FONDO MODAL -->
+<div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;" onclick="cerrarModal()"></div>
 
 <script>
+// CAMBIA ESTO POR TU EMAIL
+const MI_EMAIL = "TU_EMAIL@GMAIL.COM";
+
+// FUNCIONES DE CANTIDAD
 function changeQty(id, amount) {
   const input = document.getElementById(id);
   let value = parseInt(input.value) || 0;
@@ -163,10 +93,89 @@ function calcular() {
   const ban = parseInt(document.getElementById("bandejas").value) || 0;
   const total = (doc * 2400) + (ban * 6000);
   document.getElementById("total").textContent = total;
+  document.getElementById("total-hidden").value = "$" + total;
 }
 
-document.getElementById("docenas").addEventListener("input", calcular);
-document.getElementById("bandejas").addEventListener("input", calcular);
+// MODAL
+function mostrarConfirmacion() {
+  document.getElementById('pedidoConfirmado').style.display = 'block';
+  document.getElementById('overlay').style.display = 'block';
+}
+
+function cerrarModal() {
+  document.getElementById('pedidoConfirmado').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+}
+
+function nuevoPedido() {
+  document.querySelector('form').reset();
+  document.getElementById('docenas').value = 0;
+  document.getElementById('bandejas').value = 0;
+  calcular();
+  if (window.turnstile) turnstile.reset();
+  cerrarModal();
+}
+
+// ENVÍO DEL FORMULARIO
+document.getElementById('pedidoForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  // VALIDAR CAPTCHA
+  const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
+  if (!turnstileResponse) {
+    alert('❌ Por favor, completa el captcha');
+    return;
+  }
+  
+  // VALIDAR PRODUCTOS
+  const docenas = parseInt(document.getElementById('docenas').value) || 0;
+  const bandejas = parseInt(document.getElementById('bandejas').value) || 0;
+  if (docenas === 0 && bandejas === 0) {
+    alert('❌ Debes pedir al menos un producto');
+    return;
+  }
+  
+  // PREPARAR ENVÍO
+  const formData = new FormData(this);
+  formData.append('_captcha', turnstileResponse);
+  
+  const submitBtn = document.getElementById('btnSubmit');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando...';
+  
+  try {
+    const response = await fetch('https://formsubmit.co/' + MI_EMAIL, {
+      method: 'POST',
+      body: formData
+    });
+    
+    if (response.ok) {
+      mostrarConfirmacion();
+      this.reset();
+      document.getElementById('docenas').value = 0;
+      document.getElementById('bandejas').value = 0;
+      calcular();
+      if (window.turnstile) turnstile.reset();
+    } else {
+      alert('❌ Error al enviar. Intenta de nuevo.');
+    }
+  } catch (error) {
+    alert('❌ Error de conexión');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Confirmar Pedido';
+  }
+});
+
+// INICIAR
+calcular();
+
+// CARGAR NAVBAR
+fetch("navbar.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("navbar-container").innerHTML = data;
+  });
 </script>
 
 <script>
