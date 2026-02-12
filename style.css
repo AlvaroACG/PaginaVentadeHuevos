@@ -28,6 +28,13 @@ header,
   background-color: #5d4037; /* CAMBIA ESTO POR EL COLOR DE TU BARRA */
 }
 
+.navbar-container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
 
 .logo-link {
   color: white;
@@ -318,6 +325,7 @@ header,
   -webkit-appearance: none;
   margin: 0;
 }
+
 
 
 
