@@ -25,7 +25,7 @@ header,
 
 /* Si tu barra tiene un color específico, asegúrate que herede */
 #navbar-container {
-  background-color: rgb(244, 241, 234); /* CAMBIA ESTO POR EL COLOR DE TU BARRA */
+  background-color: #5d4037; /* CAMBIA ESTO POR EL COLOR DE TU BARRA */
 }
 
 
@@ -318,6 +318,7 @@ header,
   -webkit-appearance: none;
   margin: 0;
 }
+
 
 
 
