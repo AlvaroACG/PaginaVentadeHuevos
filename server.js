@@ -25,5 +25,11 @@ app.get("/pedido.html", (req, res) => {
   res.sendFile(path.join(__dirname, "pedido.html"));
 });
 
+app.get("/beneficio.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "beneficio.html"));
+});
+
+
+
 
 
