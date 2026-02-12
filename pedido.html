@@ -206,5 +206,15 @@ document.getElementById("docenas").addEventListener("input", calcularTotal);
 document.getElementById("bandejas").addEventListener("input", calcularTotal);
 </script>
 
+<script>
+const toggle = document.getElementById("navbar-toggle");
+const menu = document.getElementById("navbar-menu");
+
+toggle.addEventListener("click", () => {
+  menu.classList.toggle("active");
+});
+</script>
+
+
 </body>
 </html>
