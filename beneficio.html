@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beneficios del Huevo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="navbar-container"></div>
+
+<section class="benefits-hero">
+  <h1>Beneficios de Comer Huevo 🥚</h1>
+  <p>Un alimento completo, natural y nutritivo.</p>
+</section>
+
+<section class="benefits-container">
+
+  <div class="benefit-card">
+    <h3>Alta Proteína</h3>
+    <p>Contiene proteínas de alto valor biológico esenciales para el músculo.</p>
+  </div>
+
+  <div class="benefit-card">
+    <h3>Vitaminas y Minerales</h3>
+    <p>Fuente natural de vitamina B12, D, hierro y zinc.</p>
+  </div>
+
+  <div class="benefit-card">
+    <h3>Salud Cerebral</h3>
+    <p>Rico en colina, importante para la memoria y función cognitiva.</p>
+  </div>
+
+  <div class="benefit-card">
+    <h3>Saciedad</h3>
+    <p>Ayuda a controlar el apetito y mantener energía estable.</p>
+  </div>
+
+</section>
+
+<script>
+fetch("navbar.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("navbar-container").innerHTML = data;
+  });
+</script>
+
+</body>
+</html>
