@@ -14,33 +14,33 @@
 <section class="form-card">
   <h2>Realizar Pedido 🥚</h2>
 
-  <form action="/pedido" method="POST">
-
+  <form action="https://formsubmit.co/alvcarvajalg@gmail.com" method="POST">
+  
     <input type="text" name="nombre" placeholder="Nombre completo" required>
     <input type="tel" name="telefono" placeholder="Teléfono" required>
     <input type="text" name="direccion" placeholder="Dirección o referencia" required>
-
+  
     <label>Docenas ($2400)</label>
     <div class="qty-control">
       <button type="button" onclick="changeQty('docenas', -1)">-</button>
       <input type="number" id="docenas" name="docenas" value="0" min="0">
       <button type="button" onclick="changeQty('docenas', 1)">+</button>
     </div>
-
+  
     <label>Bandejas (30 huevos) ($6000)</label>
     <div class="qty-control">
       <button type="button" onclick="changeQty('bandejas', -1)">-</button>
       <input type="number" id="bandejas" name="bandejas" value="0" min="0">
       <button type="button" onclick="changeQty('bandejas', 1)">+</button>
     </div>
-
+  
     <h3>Total: $<span id="total">0</span></h3>
-
+  
     <!-- Cloudflare Turnstile -->
     <div class="cf-turnstile" data-sitekey="TU_SITE_KEY_AQUI"></div>
-
+  
     <button type="submit" class="btn-primary">Confirmar Pedido</button>
-
+  
   </form>
 </section>
 
