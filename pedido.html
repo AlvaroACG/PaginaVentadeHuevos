@@ -3,151 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huevos de Campo</title>
-<link rel="stylesheet" href="styles.css">
+<title>Realizar Pedido | Huevos de Campo</title>
+
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f5f3ef;
+}
+
+header{
+  background:#6d4c41;
+  color:white;
+  padding:15px;
+  text-align:center;
+}
+
+.container{
+  max-width:600px;
+  margin:40px auto;
+  background:white;
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+h2{
+  margin-top:0;
+  text-align:center;
+}
+
+label{
+  display:block;
+  margin-top:15px;
+  font-weight:bold;
+}
+
+input, textarea, select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  box-sizing:border-box;
+}
+
+.quantity-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+}
+
+.quantity-box button{
+  width:35px;
+  height:35px;
+  border:none;
+  background:#6d4c41;
+  color:white;
+  font-size:18px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.quantity-box input{
+  width:60px;
+  text-align:center;
+}
+
+.total{
+  margin-top:20px;
+  font-size:18px;
+  font-weight:bold;
+  text-align:right;
+}
+
+button[type="submit"]{
+  margin-top:20px;
+  width:100%;
+  padding:12px;
+  background:#4caf50;
+  border:none;
+  color:white;
+  font-size:16px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+button[type="submit"]:hover{
+  opacity:0.9;
+}
+
+@media(max-width:600px){
+  .container{
+    margin:20px;
+    padding:20px;
+  }
+}
+</style>
 </head>
+
 <body>
 
 <header>
-  <div class="wrapper nav">
-    <h1>🥚 Huevos de Campo</h1>
-    <div class="links">
-      <a href="#pedido">Pedido</a>
-      <a href="#contacto">Contacto</a>
-    </div>
-  </div>
+  <h1>Pedido de Huevos de Campo</h1>
 </header>
 
-<main class="wrapper">
+<div class="container">
 
-  <section class="hero">
-    <h2>Huevos frescos directo del campo</h2>
-    <p>Gallina feliz</p>
-  </section>
+<h2>Formulario de Pedido</h2>
 
-  <section id="pedido" class="card">
-    <h2>Realizar Pedido</h2>
+<form action="/pedido" method="POST">
 
-    <form action="https://paginaventadehuevos.onrender.com" method="POST">
+<label>Nombre Completo</label>
+<input type="text" name="nombre" required>
 
-      <input type="text" name="nombre" placeholder="Tu nombre" required>
+<label>Teléfono</label>
+<input type="tel" name="telefono" required>
 
-      <div class="grid">
-        <div>
-          <label>Docenas ($2.400)</label>
-          <input type="number" name="docenas" min="0" value="0" id="docenas">
-          <button type="button" onclick="addToCart()">Agregar al carrito</button>
-        </div>
+<label>Correo Electrónico</label>
+<input type="email" name="correo" required>
 
-        <div>
-          <label>Bandejas (30 - $6.000)</label>
-          <input type="number" name="bandejas" min="0" value="0" id="bandejas">
-          <button type="button" onclick="addToCart()">Agregar al carrito</button>
-        </div>
-      </div>
+<label>Dirección de Entrega</label>
+<textarea name="direccion" required></textarea>
 
-      <div class="total">
-        Total: $<span id="total">0</span>
-      </div>
+<label>Docenas ($2.400 c/u)</label>
+<div class="quantity-box">
+  <button type="button" onclick="cambiarCantidad('docenas', -1)">−</button>
+  <input type="number" id="docenas" name="docenas" value="0" min="0">
+  <button type="button" onclick="cambiarCantidad('docenas', 1)">+</button>
+</div>
 
-      <label class="check">
-        <input type="checkbox" required>
-        Confirmo que no soy un robot
-      </label>
+<label>Bandejas ($6.000 c/u)</label>
+<div class="quantity-box">
+  <button type="button" onclick="cambiarCantidad('bandejas', -1)">−</button>
+  <input type="number" id="bandejas" name="bandejas" value="0" min="0">
+  <button type="button" onclick="cambiarCantidad('bandejas', 1)">+</button>
+</div>
 
-      <button type="submit">Enviar Pedido</button>
+<div class="total">
+Total: $<span id="total">0</span>
+</div>
 
-    </form>
-  </section>
+<br>
 
-  <section id="contacto" class="card center">
-    <h2>Contacto</h2>
-    <a class="whatsapp" href="https://wa.me/56900000000" target="_blank">
-      WhatsApp
-    </a>
-  </section>
+<div class="h-captcha" data-sitekey="TU_SITE_KEY_AQUI"></div>
 
-</main>
+<button type="submit">Enviar Pedido</button>
 
-<footer>
-  © 2026 Huevos de Campo
-</footer>
+</form>
+
+</div>
 
 <script>
-const d = document.getElementById("docenas");
-const b = document.getElementById("bandejas");
-const t = document.getElementById("total");
+const precioDocena = 2400;
+const precioBandeja = 6000;
 
-function calcular() {
-  const total = (parseInt(d.value)||0)*2400 + (parseInt(b.value)||0)*6000;
-  t.textContent = total;
+function cambiarCantidad(id, cambio){
+  const input = document.getElementById(id);
+  let valor = parseInt(input.value) || 0;
+  valor += cambio;
+  if(valor < 0) valor = 0;
+  input.value = valor;
+  calcularTotal();
 }
 
-d.addEventListener("input", calcular);
-b.addEventListener("input", calcular);
-let cart = [];
-
-function addToCart() {
+function calcularTotal(){
   const docenas = parseInt(document.getElementById("docenas").value) || 0;
   const bandejas = parseInt(document.getElementById("bandejas").value) || 0;
-
-  if (docenas === 0 && bandejas === 0) return;
-
-  let total = (docenas * 2400) + (bandejas * 6000);
-
-  cart.push({ docenas, bandejas, total });
-
-  updateCart();
+  const total = (docenas * precioDocena) + (bandejas * precioBandeja);
+  document.getElementById("total").textContent = total;
 }
 
-function updateCart() {
-  const container = document.getElementById("cart-items");
-  const count = document.getElementById("cart-count");
-  const totalSpan = document.getElementById("cart-total");
-
-  container.innerHTML = "";
-
-  let totalGeneral = 0;
-
-  cart.forEach((item, index) => {
-    totalGeneral += item.total;
-
-    container.innerHTML += `
-      <div>
-        Docenas: ${item.docenas} |
-        Bandejas: ${item.bandejas}
-      </div>
-    `;
-  });
-
-  count.textContent = cart.length;
-  totalSpan.textContent = totalGeneral;
-}
-
-function toggleCart() {
-  document.getElementById("cart").classList.toggle("open");
-}
+document.getElementById("docenas").addEventListener("input", calcularTotal);
+document.getElementById("bandejas").addEventListener("input", calcularTotal);
 </script>
 
-
 </body>
-  <!-- BOTÓN CARRITO -->
-<div class="cart-icon" onclick="toggleCart()">
-  🛒 <span id="cart-count">0</span>
-</div>
-
-<!-- PANEL CARRITO -->
-<div class="cart-panel" id="cart">
-  <div class="cart-header">
-    <h3>Tu Carrito</h3>
-    <button onclick="toggleCart()">➖</button>
-  </div>
-
-  <div id="cart-items"></div>
-
-  <div class="cart-total">
-    Total: $<span id="cart-total">0</span>
-  </div>
-</div>
-
 </html>
