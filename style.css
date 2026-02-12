@@ -6,18 +6,28 @@ body {
 }
 
 /* NAVBAR */
-.navbar {
-  background: #5d4037;
-  padding: 15px 0;
+/* BARRA CON PATRÓN DE MESA A CUADROS */
+#navbar-container,
+.navbar,
+header,
+[class*="nav"],
+[class*="barra"] {
+  background-image: 
+    linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255,255,255,0.2) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.2) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.2) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  /* Conserva tu color de fondo original */
+  background-color: inherit;
 }
 
-.navbar-container {
-  max-width: 1100px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Si tu barra tiene un color específico, asegúrate que herede */
+#navbar-container {
+  background-color: rgb(244, 241, 234); /* CAMBIA ESTO POR EL COLOR DE TU BARRA */
 }
+
 
 .logo-link {
   color: white;
@@ -308,5 +318,6 @@ body {
   -webkit-appearance: none;
   margin: 0;
 }
+
 
 
