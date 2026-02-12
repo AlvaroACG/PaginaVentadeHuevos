@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Contacto WhatsApp</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(145deg, #0b5e42 0%, #1a7a5c 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .card {
+      max-width: 400px;
+      width: 100%;
+      background: white;
+      border-radius: 32px;
+      padding: 40px 30px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .icon {
+      background: #25D366;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+    }
+    
+    .icon svg {
+      width: 50px;
+      height: 50px;
+      fill: white;
+    }
+    
+    h2 {
+      color: #1e2e3a;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    p {
+      color: #5e6f7d;
+      font-size: 17px;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      padding: 0 10px;
+    }
+    
+    .btn-wsp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      padding: 18px 25px;
+      border-radius: 60px;
+      font-size: 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 16px rgba(37, 211, 102, 0.3);
+    }
+    
+    .btn-wsp:hover {
+      background: #20bd5a;
+      transform: scale(1.02);
+      box-shadow: 0 12px 24px rgba(37, 211, 102, 0.4);
+    }
+    
+    .btn-wsp svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+    
+    .mensaje-preview {
+      background: #f2f5f7;
+      padding: 16px;
+      border-radius: 16px;
+      color: #2c3e50;
+      font-size: 15px;
+      border-left: 4px solid #25D366;
+      text-align: left;
+      word-break: break-word;
+      margin-top: 10px;
+    }
+    
+    .footer {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #95a5a6;
+    }
+    
+    /* Efecto de onda en hover */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    
+    <!-- ÍCONO WHATSAPP -->
+    <div class="icon">
+      <svg viewBox="0 0 24 24">
+        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.91 2.75 15.79 3.86 17.33L2.06 21.87L6.73 20.11C8.23 21.08 9.97 21.63 11.79 21.63H11.83C17.29 21.63 21.74 17.18 21.74 11.72C21.74 6.26 17.5 2 12.04 2ZM12.04 20.15C10.44 20.15 8.87 19.68 7.5 18.8L7.19 18.61L4.48 19.52L5.4 16.88L5.2 16.56C4.25 15.13 3.74 13.5 3.74 11.8C3.74 7.31 7.45 3.6 11.94 3.6C16.43 3.6 20.14 7.31 20.14 11.8C20.14 16.29 16.53 20.15 12.04 20.15ZM16.36 13.86C16.09 13.73 14.97 13.18 14.72 13.09C14.47 13 14.29 12.95 14.11 13.22C13.93 13.5 13.41 14.19 13.25 14.37C13.09 14.55 12.93 14.57 12.66 14.44C11.31 13.85 10.45 13.39 9.58 12.18C9.3 11.79 9.86 11.82 10.3 10.96C10.39 10.79 10.34 10.65 10.27 10.52C10.2 10.39 9.78 9.26 9.62 8.86C9.46 8.46 9.3 8.5 9.14 8.5H8.56C8.3 8.5 7.91 8.6 7.58 9.02C7.25 9.44 6.45 10.41 6.45 12.39C6.45 14.37 7.97 16.29 8.21 16.59C8.45 16.89 10.3 19.19 13.22 19.19C15.23 19.19 16.13 17.99 16.41 17.41C16.69 16.83 16.69 16.33 16.62 16.21C16.55 16.09 16.44 16.02 16.36 13.86Z"/>
+      </svg>
+    </div>
+    
+    <!-- TÍTULO -->
+    <h2>Contáctanos</h2>
+    
+    <!-- DESCRIPCIÓN -->
+    <p>¡Hola! Haz clic en el botón para enviarnos un mensaje directo por WhatsApp. Te responderemos a la brevedad.</p>
+    
+    <!-- BOTÓN WHATSAPP (el número se llena con JS) -->
+    <a href="#" id="wspLink" class="btn-wsp ripple" target="_blank">
+      <svg viewBox="0 0 24 24">
+        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.91 2.75 15.79 3.86 17.33L2.06 21.87L6.73 20.11C8.23 21.08 9.97 21.63 11.79 21.63H11.83C17.29 21.63 21.74 17.18 21.74 11.72C21.74 6.26 17.5 2 12.04 2Z"/>
+      </svg>
+      Enviar WhatsApp
+    </a>
+    
+    <!-- VISTA PREVIA DEL MENSAJE -->
+    <div class="mensaje-preview" id="mensajePreview">
+      📝 Mensaje: "Hola, quiero información"
+    </div>
+    
+    <div class="footer">
+      Tiempo de respuesta: ~5 minutos
+    </div>
+    
+  </div>
+
+  <script>
+    // ============================================
+    // CONFIGURACIÓN - CAMBIA ESTOS VALORES
+    // ============================================
+    const CONFIG = {
+      // ⚠️ PON TU NÚMERO AQUÍ (código de país sin + ni 00)
+      whatsappNumber: "56912345678", // Ej: 56912345678 (Chile)
+      
+      // Mensaje predeterminado (codificado para URL)
+      defaultMessage: "Hola, quiero información sobre sus productos",
+      
+      // Texto que se muestra en la tarjeta
+      previewMessage: "Hola, quiero información"
+    };
+    
+    // ============================================
+    // NO TOCAR NADA DE AQUÍ PARA ABAJO
+    // ============================================
+    
+    // Función para generar link de WhatsApp
+    function generarLink(numero, mensaje) {
+      const mensajeCodificado = encodeURIComponent(mensaje);
+      return `https://wa.me/${numero}?text=${mensajeCodificado}`;
+    }
+    
+    // Actualizar todo cuando cargue la página
+    document.addEventListener('DOMContentLoaded', function() {
+      const wspLink = document.getElementById('wspLink');
+      const previewDiv = document.getElementById('mensajePreview');
+      
+      // Generar el link
+      const linkCompleto = generarLink(
+        CONFIG.whatsappNumber, 
+        CONFIG.defaultMessage
+      );
+      
+      // Asignar al botón
+      wspLink.href = linkCompleto;
+      
+      // Actualizar vista previa
+      previewDiv.innerHTML = `📝 Mensaje: "${CONFIG.previewMessage}"`;
+      
+      // Si no hay número configurado, mostrar advertencia
+      if (CONFIG.whatsappNumber === "56912345678") {
+        console.warn('⚠️ CAMBIA EL NÚMERO DE WHATSAPP en CONFIG.whatsappNumber');
+        previewDiv.innerHTML += '<br><span style="color: #e74c3c; font-size: 13px;">⚠️ Número no configurado</span>';
+      }
+    });
+    
+    // Efecto ripple simple (opcional)
+    const btn = document.querySelector('.btn-wsp');
+    if(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        setTimeout(() => {
+          window.open(this.href, '_blank');
+        }, 150);
+      });
+    }
+  </script>
+</body>
+</html>
