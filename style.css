@@ -34,6 +34,7 @@ header,
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
 
 
 .logo-link {
@@ -325,6 +326,7 @@ header,
   -webkit-appearance: none;
   margin: 0;
 }
+
 
 
 
