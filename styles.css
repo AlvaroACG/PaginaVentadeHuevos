@@ -118,27 +118,30 @@ footer {
 
 .cart-icon {
   position: fixed;
-  top: 20px;
+  bottom: 20px;          /* ahora abajo */
   right: 20px;
   background: #6d4c41;
   color: white;
-  padding: 10px 15px;
+  padding: 12px 18px;
   border-radius: 30px;
   cursor: pointer;
   z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .cart-panel {
   position: fixed;
-  right: -350px;
   top: 0;
-  width: 300px;
+  right: -350px;
+  width: 320px;
   height: 100%;
   background: white;
-  box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+  box-shadow: -5px 0 25px rgba(0,0,0,0.25);
   padding: 20px;
-  transition: 0.3s;
-  z-index: 999;
+  transition: right 0.3s ease;
+  z-index: 2000;          /* MÁS alto que el botón */
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-panel.open {
@@ -149,12 +152,16 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 15px;
 }
 
 .cart-total {
-  margin-top: 20px;
+  margin-top: auto;
   font-weight: bold;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
 }
+
 
 
 
