@@ -200,6 +200,82 @@ body {
   }
 }
 
+/* Selector de cantidad - estilo triangular */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.qty-btn {
+  width: 32px;
+  height: 32px;
+  background: #4a6fa5;
+  color: white;
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+/* Forma de triángulo (izquierdo) */
+.qty-btn:first-of-type {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 50% 20%);
+  border-radius: 6px 0 0 6px;
+}
+
+/* Forma de triángulo (derecho) */
+.qty-btn:last-of-type {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 50% 80%);
+  border-radius: 0 6px 6px 0;
+}
+
+.qty-btn:hover {
+  background: #2c3e50;
+}
+
+.qty-input {
+  width: 50px;
+  height: 32px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  -moz-appearance: textfield;
+}
+
+.qty-input::-webkit-outer-spin-button,
+.qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para que el label y el selector estén en línea */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+/* Ajuste responsive */
+@media (max-width: 480px) {
+  .qty-btn {
+    width: 28px;
+    height: 28px;
+  }
+  .qty-input {
+    width: 45px;
+    height: 28px;
+  }
+}
 
 
 
