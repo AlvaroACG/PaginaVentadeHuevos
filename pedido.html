@@ -13,35 +13,91 @@
 
 <section class="form-card">
   <h2>Realizar Pedido 🥚</h2>
-
-  <form action="https://formsubmit.co/alvcarvajalg@gmail.com" method="POST">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <form action="https://formsubmit.co/TU_EMAIL@GMAIL.COM" method="POST">
   
-    <input type="text" name="nombre" placeholder="Nombre completo" required>
-    <input type="tel" name="telefono" placeholder="Teléfono" required>
-    <input type="text" name="direccion" placeholder="Dirección o referencia" required>
-  
-    <label>Docenas ($2400)</label>
+  <!-- ===== CONFIGURACIÓN DEL CORREO ===== -->
+    <input type="hidden" name="_subject" value="🥚 NUEVO PEDIDO - HUEVOS FRESCOS 🥚">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://tusitio.com/gracias.html">
+    <input type="hidden" name="_autoresponse" value="✅ ¡Gracias por tu pedido! Te llamaremos para confirmar la entrega. Horario de atención: Lunes a Sábado 9:00-18:00 hrs.">
+    
+    <!-- ===== DATOS DEL CLIENTE ===== -->
+    <h3>📋 INFORMACIÓN DE CONTACTO</h3>
+    <input type="text" name="👤 NOMBRE COMPLETO" placeholder="Ej: María González" required>
+    <input type="tel" name="📱 TELÉFONO / WHATSAPP" placeholder="Ej: +56 9 1234 5678" required>
+    <input type="text" name="📍 DIRECCIÓN DE ENTREGA" placeholder="Calle, número, referencia" required>
+    
+    <!-- ===== PRODUCTOS ===== -->
+    <h3>🥚 PRODUCTOS SOLICITADOS</h3>
+    
+    <label>📦 DOCENAS (30 huevos) - $2.400 c/u</label>
     <div class="qty-control">
       <button type="button" onclick="changeQty('docenas', -1)">-</button>
-      <input type="number" id="docenas" name="docenas" value="0" min="0">
+      <input type="number" id="docenas" name="🥚 DOCENAS (30 huevos)" value="0" min="0">
       <button type="button" onclick="changeQty('docenas', 1)">+</button>
     </div>
-  
-    <label>Bandejas (30 huevos) ($6000)</label>
+    
+    <label>📦 BANDEJAS (30 huevos) - $6.000 c/u</label>
     <div class="qty-control">
       <button type="button" onclick="changeQty('bandejas', -1)">-</button>
-      <input type="number" id="bandejas" name="bandejas" value="0" min="0">
+      <input type="number" id="bandejas" name="📦 BANDEJAS (30 huevos)" value="0" min="0">
       <button type="button" onclick="changeQty('bandejas', 1)">+</button>
     </div>
-  
-    <h3>Total: $<span id="total">0</span></h3>
-  
+    
+    <!-- ===== TOTAL (se envía automático) ===== -->
+    <h3>💰 TOTAL: $<span id="total">0</span></h3>
+    <input type="hidden" name="💰 MONTO TOTAL" id="total-input">
+    
+    <!-- ===== FECHA Y HORA (automático) ===== -->
+    <input type="hidden" name="🕐 FECHA DEL PEDIDO" id="fecha-input">
+    <input type="hidden" name="🌐 PÁGINA" value="Formulario Web">
+    
     <!-- Cloudflare Turnstile -->
     <div class="cf-turnstile" data-sitekey="TU_SITE_KEY_AQUI"></div>
-  
-    <button type="submit" class="btn-primary">Confirmar Pedido</button>
-  
+    
+    <button type="submit" class="btn-primary">✅ CONFIRMAR PEDIDO</button>
   </form>
+
+<script>
+// Calcular total
+function changeQty(id, delta) {
+  const input = document.getElementById(id);
+  let val = parseInt(input.value) || 0;
+  val = Math.max(0, val + delta);
+  input.value = val;
+  calcularTotal();
+}
+
+function calcularTotal() {
+  const doc = parseInt(document.getElementById('docenas').value) || 0;
+  const ban = parseInt(document.getElementById('bandejas').value) || 0;
+  const total = (doc * 2400) + (ban * 6000);
+  document.getElementById('total').textContent = total;
+  document.getElementById('total-input').value = '$' + total.toLocaleString('es-CL');
+}
+
+// Antes de enviar
+document.querySelector('form').addEventListener('submit', function() {
+  // Fecha actual
+  const ahora = new Date();
+  const fecha = ahora.toLocaleString('es-CL', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+  document.getElementById('fecha-input').value = fecha;
+  
+  // Total
+  calcularTotal();
+});
+
+// Inicializar
+calcularTotal();
+</script>
 </section>
 
 <script>
