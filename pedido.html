@@ -66,20 +66,46 @@
   </form>
 
 <script>
-document.getElementById('pedidoForm').addEventListener('submit', async function(e) {
+document.querySelector('form').addEventListener('submit', async function(e) {
   e.preventDefault();
   
-  // ✅ VALIDAR TURNSTILE - ESTO ES LO QUE FALTABA
-  const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
-  
-  if (!turnstileResponse) {
+  // 1. VALIDAR CAPTCHA (ESTO NUEVO)
+  const captchaToken = document.querySelector('[name="cf-turnstile-response"]')?.value;
+  if (!captchaToken) {
     alert('❌ Por favor, completa el captcha');
     return;
   }
   
-  // El resto de tu código de envío...
-  // (validar productos, enviar, mostrar modal, etc)
+  // 2. VALIDAR PRODUCTOS
+  const docenas = parseInt(document.getElementById('docenas').value) || 0;
+  const bandejas = parseInt(document.getElementById('bandejas').value) || 0;
+  if (docenas === 0 && bandejas === 0) {
+    alert('❌ Debes pedir al menos un producto');
+    return;
+  }
   
+  // 3. ENVIAR
+  try {
+    const response = await fetch(this.action, {
+      method: 'POST',
+      body: new FormData(this)
+    });
+    
+    if (response.ok) {
+      mostrarConfirmacion();
+      this.reset();
+      document.getElementById('docenas').value = 0;
+      document.getElementById('bandejas').value = 0;
+      calcular();
+      
+      // 4. RESETEAR CAPTCHA
+      if (window.turnstile) {
+        turnstile.reset();
+      }
+    }
+  } catch (error) {
+    alert('❌ Error al enviar');
+  }
 });
 </script>
 <script>
