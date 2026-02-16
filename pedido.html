@@ -6,6 +6,92 @@
 <title>Hacer Pedido</title>
 <link rel="stylesheet" href="style.css">
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<style>
+  .quantity-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .qty-field {
+    width: 60px;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .qty-down, .qty-up {
+    background: #6d4c41;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+  
+  .qty-down:hover, .qty-up:hover {
+    background: #5d4037;
+  }
+  
+  .form-card label {
+    display: block;
+    margin: 20px 0 10px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .form-card h3 {
+    margin-top: 25px;
+    color: #2e7d32;
+    font-size: 24px;
+  }
+  
+  /* Modal */
+  #pedidoConfirmado {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    z-index: 1000;
+    max-width: 400px;
+  }
+  
+  #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+  }
+  
+  /* Modo oscuro */
+  @media (prefers-color-scheme: dark) {
+    .form-card label {
+      color: #f1f1f1;
+    }
+    #pedidoConfirmado {
+      background: #2e2e2e;
+      color: #f1f1f1;
+    }
+    #pedidoConfirmado h3 {
+      color: #4caf50;
+    }
+  }
+</style>
+<base target="_blank">
 </head>
 <body>
 
@@ -13,7 +99,6 @@
 
 <section class="form-card">
   <h2>Realizar Pedido 🥚</h2>
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <form action="https://formsubmit.co/acarvita@GMAIL.COM" method="POST" id="pedidoForm">
   
     <!-- CONFIGURACIÓN FORMSUBMIT -->
@@ -62,7 +147,7 @@
   </form>
 
 <!-- MODAL DE CONFIRMACIÓN -->
-<div id="pedidoConfirmado" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 30px rgba(0,0,0,0.2); text-align: center; z-index: 1000; max-width: 400px;">
+<div id="pedidoConfirmado">
   <h3 style="margin-top: 0; color: #2e7d32;">✅ ¡Pedido confirmado!</h3>
   <p style="margin-bottom: 25px;">Tu pedido ha sido enviado correctamente. Te contactaremos pronto.</p>
   <div style="display: flex; gap: 15px; justify-content: center;">
@@ -72,11 +157,11 @@
 </div>
 
 <!-- FONDO MODAL -->
-<div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;" onclick="cerrarModal()"></div>
+<div id="overlay" onclick="cerrarModal()"></div>
 
 <script>
 // CAMBIA ESTO POR TU EMAIL
-const MI_EMAIL = "TU_EMAIL@GMAIL.COM";
+const MI_EMAIL = "acarvita@GMAIL.COM";
 
 // FUNCIONES DE CANTIDAD
 function changeQty(id, amount) {
@@ -92,8 +177,8 @@ function calcular() {
   const doc = parseInt(document.getElementById("docenas").value) || 0;
   const ban = parseInt(document.getElementById("bandejas").value) || 0;
   const total = (doc * 2400) + (ban * 6000);
-  document.getElementById("total").textContent = total;
-  document.getElementById("total-hidden").value = "$" + total;
+  document.getElementById("total").textContent = total.toLocaleString();
+  document.getElementById("total-hidden").value = "$" + total.toLocaleString();
 }
 
 // MODAL
@@ -175,17 +260,18 @@ fetch("navbar.html")
   .then(res => res.text())
   .then(data => {
     document.getElementById("navbar-container").innerHTML = data;
-  });
-</script>
-
-<script>
-fetch("navbar.html")
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById("navbar-container").innerHTML = data;
+    
+    // Activar menú hamburguesa
+    const toggle = document.querySelector(".menu-toggle");
+    const menu = document.querySelector(".navbar-menu");
+    
+    if (toggle) {
+      toggle.addEventListener("click", function() {
+        menu.classList.toggle("active");
+      });
+    }
   });
 </script>
 
 </body>
 </html>
-
