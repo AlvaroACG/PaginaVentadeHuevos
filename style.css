@@ -64,6 +64,12 @@ main {
 }
 
 .logo-link img {
+  height: 70px;
+  width: auto;
+}
+
+
+.logo-link img {
   height: 32px;
   margin-right: 10px;
 }
@@ -269,4 +275,5 @@ main {
     max-width: 100%;
   }
 }
+
 
