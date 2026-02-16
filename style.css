@@ -64,9 +64,9 @@ main {
 }
 
 .logo-link img {
-  height: 70px;
+  height: 150px;
   width: auto;
-  margin-right: 10px;
+  margin-right: 35px;
 }
 
 /* MENÚ NORMAL */
@@ -276,6 +276,7 @@ main {
     max-width: 100%;
   }
 }
+
 
 
 
