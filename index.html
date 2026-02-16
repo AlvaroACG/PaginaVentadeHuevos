@@ -14,7 +14,7 @@
 <section class="hero-card">
   <h1>Distribuidor de Huevos Frescos 🥚</h1>
   <p>Producción local, gallinas <strong>libres</strong> criadas de forma tradicional. <strong>Tamaño Extra</strong>.</p>
-  <a href="pedido.html" class="btn-primary">Haz tu pedido</a>
+  <a href="/pedido.html" class="btn-primary">Haz tu pedido</a>
 </section>
 
 <!-- SECCIÓN DE 3 TARJETAS -->
@@ -23,7 +23,7 @@
   <div class="info-card">
     <h3>Beneficios de comer huevo</h3>
     <p>Alimentación balanceada y cuidado responsable.</p>
-    <a href="beneficio.html">Conoce mas</a>
+    <a href="/beneficio.html">Conoce mas</a>
   </div>
 
   <div class="info-card">
@@ -38,16 +38,30 @@
 
 </section>
 
+
 <script>
-fetch("navbar.html")
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById("navbar-container").innerHTML = data;
-  });
+document.addEventListener("DOMContentLoaded", function() {
+  fetch("/navbar.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("navbar-container").innerHTML = data;
+
+      const toggle = document.querySelector(".menu-toggle");
+      const menu = document.querySelector(".navbar-menu");
+
+      if (toggle) {
+        toggle.addEventListener("click", function() {
+          menu.classList.toggle("active");
+        });
+      }
+    });
+});
 </script>
 
 </body>
 </html>
+
+
 
 
 
