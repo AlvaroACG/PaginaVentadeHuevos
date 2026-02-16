@@ -102,10 +102,11 @@
   
     <!-- CONFIGURACIÓN FORMSUBMIT -->
     <input type="hidden" name="_subject" value="🛒 NUEVO PEDIDO DE HUEVOS">
-    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_template" value="none">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="">
     <input type="hidden" name="_autoresponse" value="✅ Gracias por tu pedido. Te contactaremos pronto.">
+
     
     <!-- TUS CAMPOS -->
     <input type="text" name="👤 Nombre completo" placeholder="Nombre completo" required>
@@ -258,6 +259,36 @@ document.getElementById('pedidoForm').addEventListener('submit', async function(
   // PREPARAR ENVÍO
   const formData = new FormData(this);
   formData.delete("cf-turnstile-response");
+  
+  const mensajePersonalizado = `
+  🛒 NUEVO PEDIDO DE HUEVOS
+  
+  👤 Nombre: ${formData.get("👤 Nombre completo")}
+  📱 Teléfono: ${formData.get("📱 Teléfono")}
+  📍 Dirección: ${formData.get("📍 Dirección")}
+  🪪 RUT: ${formData.get("🪪 RUT") || "No ingresado"}
+  🕒 Horario: ${formData.get("🕒 Horario preferido de entrega") || "No especificado"}
+  💳 Método de pago: ${formData.get("💳 Método de pago")}
+  
+  🥚 Docenas: ${formData.get("🥚 Docenas")}
+  📦 Bandejas: ${formData.get("📦 Bandejas")}
+  
+  💰 TOTAL: ${formData.get("💰 Total")}
+  `;
+  
+  formData.append("Pedido", mensajePersonalizado);
+  
+  // Eliminamos los campos individuales para que no se envíen duplicados
+  formData.delete("👤 Nombre completo");
+  formData.delete("📱 Teléfono");
+  formData.delete("📍 Dirección");
+  formData.delete("🪪 RUT");
+  formData.delete("🕒 Horario preferido de entrega");
+  formData.delete("💳 Método de pago");
+  formData.delete("🥚 Docenas");
+  formData.delete("📦 Bandejas");
+  formData.delete("💰 Total");
+
 
   
   const submitBtn = document.getElementById('btnSubmit');
