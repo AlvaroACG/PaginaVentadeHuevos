@@ -111,6 +111,21 @@
     <input type="text" name="👤 Nombre completo" placeholder="Nombre completo" required>
     <input type="tel" name="📱 Teléfono" placeholder="Teléfono" required>
     <input type="text" name="📍 Dirección" placeholder="Dirección o referencia" required>
+    <input type="text" 
+       name="🪪 RUT" 
+       placeholder="RUT (ej: 12345678-9)" 
+       pattern="^[0-9]{7,8}-[0-9kK]{1}$"
+       title="Formato: 12345678-9">
+    <input type="text" 
+       name="🕒 Horario preferido de entrega" 
+       placeholder="Horario preferido (ej: Después de las 18:00)">
+    <label style="display:block; margin-top:20px; font-weight:bold;">Método de pago</label>
+    <select name="💳 Método de pago" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd;">
+      <option value="">Seleccionar método de pago</option>
+      <option value="Efectivo">Efectivo</option>
+      <option value="Transferencia">Transferencia</option>
+    </select>
+
   
     <!-- DOCENAS -->
     <label>Docenas ($2,400)</label>
