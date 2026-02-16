@@ -114,7 +114,7 @@
     <input type="text" name="📍 Dirección" placeholder="Dirección o referencia" required>
   
     <!-- DOCENAS -->
-    <label>Docenas ($2400)</label>
+    <label>Docenas ($2,400)</label>
     <div style="display: flex; align-items: center; justify-content: flex-end;">
       <span style="font-weight: 500; margin-right: 10px;">Cantidad:</span>
       <div class="quantity-wrap">
@@ -125,7 +125,7 @@
     </div>
   
     <!-- BANDEJAS -->
-    <label>Bandejas (30 huevos) ($6000)</label>
+    <label>Bandejas (30 huevos) ($6,000)</label>
     <div style="display: flex; align-items: center; justify-content: flex-end;">
       <span style="font-weight: 500; margin-right: 10px;">Cantidad:</span>
       <div class="quantity-wrap">
@@ -139,8 +139,15 @@
     <h3>Total: $<span id="total">0</span></h3>
     <input type="hidden" name="💰 Total" id="total-hidden">
   
-    <!-- CLOUDFLARE TURNSTILE -->
-    <div class="cf-turnstile" data-sitekey="0x4AAAAAACa7hVhkSs0CD7Cv" style="margin: 20px 0;"></div>
+    <!-- CLOUDFLARE TURNSTILE - Input oculto para el token -->
+    <input type="hidden" name="cf-turnstile-response" id="cf-turnstile-response">
+    
+    <!-- CLOUDFLARE TURNSTILE WIDGET -->
+    <div class="cf-turnstile" 
+         data-sitekey="0x4AAAAAACa7hVhkSs0CD7Cv"
+         data-callback="onTurnstileSuccess"
+         data-theme="light"
+         style="margin: 20px 0;"></div>
     
     <!-- BOTÓN -->
     <button type="submit" class="btn-primary" id="btnSubmit">Confirmar Pedido</button>
@@ -160,8 +167,16 @@
 <div id="overlay" onclick="cerrarModal()"></div>
 
 <script>
-// CAMBIA ESTO POR TU EMAIL
+// VARIABLES GLOBALES
+let turnstileToken = '';
 const MI_EMAIL = "acarvita@GMAIL.COM";
+
+// CALLBACK cuando Turnstile se completa correctamente
+function onTurnstileSuccess(token) {
+  turnstileToken = token;
+  document.getElementById('cf-turnstile-response').value = token;
+  console.log('✅ Captcha completado');
+}
 
 // FUNCIONES DE CANTIDAD
 function changeQty(id, amount) {
@@ -197,7 +212,14 @@ function nuevoPedido() {
   document.getElementById('docenas').value = 0;
   document.getElementById('bandejas').value = 0;
   calcular();
-  if (window.turnstile) turnstile.reset();
+  
+  // Resetear Turnstile
+  if (window.turnstile) {
+    turnstile.reset();
+    turnstileToken = '';
+    document.getElementById('cf-turnstile-response').value = '';
+  }
+  
   cerrarModal();
 }
 
@@ -206,9 +228,8 @@ document.getElementById('pedidoForm').addEventListener('submit', async function(
   e.preventDefault();
   
   // VALIDAR CAPTCHA
-  const turnstileResponse = document.querySelector('[name="cf-turnstile-response"]')?.value;
-  if (!turnstileResponse) {
-    alert('❌ Por favor, completa el captcha');
+  if (!turnstileToken || turnstileToken === '') {
+    alert('❌ Por favor, completa el captcha (verifica que no eres un robot)');
     return;
   }
   
@@ -222,7 +243,6 @@ document.getElementById('pedidoForm').addEventListener('submit', async function(
   
   // PREPARAR ENVÍO
   const formData = new FormData(this);
-  formData.append('_captcha', turnstileResponse);
   
   const submitBtn = document.getElementById('btnSubmit');
   submitBtn.disabled = true;
@@ -240,7 +260,13 @@ document.getElementById('pedidoForm').addEventListener('submit', async function(
       document.getElementById('docenas').value = 0;
       document.getElementById('bandejas').value = 0;
       calcular();
-      if (window.turnstile) turnstile.reset();
+      
+      // Resetear Turnstile
+      if (window.turnstile) {
+        turnstile.reset();
+        turnstileToken = '';
+        document.getElementById('cf-turnstile-response').value = '';
+      }
     } else {
       alert('❌ Error al enviar. Intenta de nuevo.');
     }
@@ -272,6 +298,9 @@ fetch("navbar.html")
     }
   });
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
