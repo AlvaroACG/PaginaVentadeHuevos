@@ -257,6 +257,8 @@ document.getElementById('pedidoForm').addEventListener('submit', async function(
   
   // PREPARAR ENVÍO
   const formData = new FormData(this);
+  formData.delete("cf-turnstile-response");
+
   
   const submitBtn = document.getElementById('btnSubmit');
   submitBtn.disabled = true;
