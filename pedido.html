@@ -124,7 +124,7 @@
 
   
     <!-- DOCENAS -->
-    <label>Docenas ($2,400)</label>
+    <label>Docenas ($2.640)</label>
     <div style="display: flex; align-items: center; justify-content: flex-end;">
       <span style="font-weight: 500; margin-right: 10px;">Cantidad:</span>
       <div class="quantity-wrap">
@@ -135,7 +135,7 @@
     </div>
   
     <!-- BANDEJAS -->
-    <label>Bandejas (30 huevos) ($6,000)</label>
+    <label>Bandejas (30 huevos) ($6.600)</label>
     <div style="display: flex; align-items: center; justify-content: flex-end;">
       <span style="font-weight: 500; margin-right: 10px;">Cantidad:</span>
       <div class="quantity-wrap">
@@ -201,7 +201,7 @@ function changeQty(id, amount) {
 function calcular() {
   const doc = parseInt(document.getElementById("docenas").value) || 0;
   const ban = parseInt(document.getElementById("bandejas").value) || 0;
-  const total = (doc * 2400) + (ban * 6000);
+  const total = (doc * 2640) + (ban * 6600);
   document.getElementById("total").textContent = total.toLocaleString();
   document.getElementById("total-hidden").value = "$" + total.toLocaleString();
 }
