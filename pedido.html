@@ -156,6 +156,8 @@
     <div class="cf-turnstile" 
          data-sitekey="0x4AAAAAACduG2J4TeKicSlA"
          data-callback="onTurnstileSuccess"
+         data-expired-callback="onTurnstileInvalid"
+         data-error-callback="onTurnstileInvalid"
          data-theme="light"
          style="margin: 20px 0;"></div>
     
@@ -186,6 +188,12 @@ function onTurnstileSuccess(token) {
   turnstileToken = token;
   document.getElementById('cf-turnstile-response').value = token;
   console.log('✅ Captcha completado');
+}
+
+// Invalidar también el estado local cuando el widget caduca o falla.
+function onTurnstileInvalid() {
+  turnstileToken = '';
+  document.getElementById('cf-turnstile-response').value = '';
 }
 
 // FUNCIONES DE CANTIDAD
@@ -251,6 +259,9 @@ document.getElementById('pedidoForm').addEventListener('submit', async function(
     return;
   }
   
+  // Recalcular también al enviar para que el total corresponda a las cantidades.
+  calcular();
+
   // PREPARAR ENVÍO
   const formData = new FormData(this);
   formData.delete("cf-turnstile-response");
@@ -318,6 +329,11 @@ document.getElementById('pedidoForm').addEventListener('submit', async function(
     submitBtn.disabled = false;
     submitBtn.textContent = 'Confirmar Pedido';
   }
+});
+
+// Actualizar el total tanto al escribir como al usar las flechas del campo.
+['docenas', 'bandejas'].forEach(id => {
+  document.getElementById(id).addEventListener('input', calcular);
 });
 
 // INICIAR
