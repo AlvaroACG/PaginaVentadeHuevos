@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hacer Pedido</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+  .quantity-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .qty-field {
+    width: 60px;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  .qty-down, .qty-up {
+    background: #6d4c41;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+
+  .qty-down:hover, .qty-up:hover {
+    background: #5d4037;
+  }
+
+  .form-card label {
+    display: block;
+    margin: 20px 0 10px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .form-card h3 {
+    margin-top: 25px;
+    color: #2e7d32;
+    font-size: 24px;
+  }
+
+  /* Modal */
+  #pedidoConfirmado {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    z-index: 1000;
+    max-width: 400px;
+  }
+
+  #overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+  }
+
+  /* Modo oscuro */
+  @media (prefers-color-scheme: dark) {
+    .form-card label {
+      color: #f1f1f1;
+    }
+    #pedidoConfirmado {
+      background: #2e2e2e;
+      color: #f1f1f1;
+    }
+    #pedidoConfirmado h3 {
+      color: #4caf50;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div id="navbar-container"></div>
+
+<section class="form-card">
+  <h2>Realizar Pedido 🥚</h2>
+  <form action="/api/pedidos" method="POST" id="pedidoForm">
+
+    <!-- DATOS DEL PEDIDO -->
+    <input type="text" name="👤 Nombre completo" placeholder="Nombre completo" required>
+    <input type="tel" name="📱 Teléfono" placeholder="Teléfono" required>
+    <input type="text" name="📍 Dirección" placeholder="Dirección o referencia" required>
+    <input type="text"
+       name="🕒 Horario preferido de entrega"
+       placeholder="Horario preferido (ej: Después de las 18:00)">
+    <label style="display:block; margin-top:20px; font-weight:bold;">Método de pago</label>
+    <select name="💳 Método de pago" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd;">
+      <option value="">Seleccionar método de pago</option>
+      <option value="Efectivo">Efectivo</option>
+      <option value="Transferencia">Transferencia</option>
+    </select>
+
+
+    <!-- DOCENAS -->
+    <label>Docenas ($2.640)</label>
+    <div style="display: flex; align-items: center; justify-content: flex-end;">
+      <span style="font-weight: 500; margin-right: 10px;">Cantidad:</span>
+      <div class="quantity-wrap">
+        <button type="button" data-qty="docenas" data-change="-1" class="qty-down">▼</button>
+        <input type="number" id="docenas" name="🥚 Docenas" value="0" min="0" max="1000" step="1" required class="qty-field">
+        <button type="button" data-qty="docenas" data-change="1" class="qty-up">▲</button>
+      </div>
+    </div>
+
+    <!-- BANDEJAS -->
+    <label>Bandejas (30 huevos) ($6.600)</label>
+    <div style="display: flex; align-items: center; justify-content: flex-end;">
+      <span style="font-weight: 500; margin-right: 10px;">Cantidad:</span>
+      <div class="quantity-wrap">
+        <button type="button" data-qty="bandejas" data-change="-1" class="qty-down">▼</button>
+        <input type="number" id="bandejas" name="📦 Bandejas" value="0" min="0" max="1000" step="1" required class="qty-field">
+        <button type="button" data-qty="bandejas" data-change="1" class="qty-up">▲</button>
+      </div>
+    </div>
+
+    <!-- TOTAL -->
+    <h3>Total: $<span id="total">0</span></h3>
+
+
+    <div id="captcha" style="margin: 20px 0;"></div>
+    <p id="formStatus" role="status" aria-live="polite"></p>
+    <!-- BOTÓN -->
+    <button type="submit" class="btn-primary" id="btnSubmit" disabled>Confirmar Pedido</button>
+  </form>
+</section>
+
+<!-- MODAL DE CONFIRMACIÓN -->
+<div id="pedidoConfirmado">
+  <h3 style="margin-top: 0; color: #2e7d32;">✅ ¡Pedido recibido!</h3>
+  <p style="margin-bottom: 25px;">Tu pedido quedó registrado. Te contactaremos para confirmar la entrega.</p>
+  <p id="orderNumber"></p>
+  <div style="display: flex; gap: 15px; justify-content: center;">
+    <button id="nuevoPedido" style="background: #4CAF50; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold;">📦 Nuevo pedido</button>
+    <button data-close-modal style="background: #f5f5f5; color: #333; border: 1px solid #ddd; padding: 12px 25px; border-radius: 8px; cursor: pointer;">OK</button>
+  </div>
+</div>
+
+<!-- FONDO MODAL -->
+<div id="overlay" data-close-modal></div>
+
+<script src="/js/pedido.js" defer></script>
+
+</body>
+</html>

@@ -1,35 +1,13 @@
-const express = require("express");
-const app = express();
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-app.post("/pedido", (req, res) => {
-  res.send("Pedido recibido correctamente");
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log("Servidor activo en puerto " + PORT);
-});
-
-const path = require("path");
-
-app.use(express.static(__dirname));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
-
-app.get("/pedido.html", (req, res) => {
-  res.sendFile(path.join(__dirname, "pedido.html"));
-});
-
-app.get("/beneficio.html", (req, res) => {
-  res.sendFile(path.join(__dirname, "beneficio.html"));
-});
-
-
-
-
-
+const { createApp } = require('./src/app');
+const { OrderStore } = require('./src/models/orders');
+const { readConfig } = require('./src/config');
+const { verifyTurnstile } = require('./src/services/turnstile');
+const { createMailer, startNotifications } = require('./src/services/mail');
+const config = readConfig(process.env);
+const store = new OrderStore(config.databasePath);
+const app = createApp({ config, store, verify: token => verifyTurnstile(token, config) });
+const stop = startNotifications(store, createMailer(config));
+const server = app.listen(config.port, () => console.log('Servidor activo en puerto ' + config.port));
+function shutdown() { stop(); server.close(() => process.exit(0)); }
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);
