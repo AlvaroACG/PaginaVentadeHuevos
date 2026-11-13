@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f7f5ec" />
+    <meta
+      name="description"
+      content="Pide huevos tamaño Extra por docenas o bandejas. Completa tus datos para coordinar el despacho en Concepción."
+    />
+    <title>Haz tu pedido · Huevos Frescos</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/js/site.js" defer></script>
+    <script src="/js/pedido.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <div id="navbar-container">
+      <div class="announcement">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z" />
+          <circle cx="12" cy="10" r="2" />
+        </svg>
+        Concepción centro <span>·</span> Despacho sin cargo adicional
+      </div>
+      <header class="site-header">
+        <div class="nav-wrap">
+          <a class="brand" href="/" aria-label="Huevos Frescos, inicio"
+            ><span class="brand-mark"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M18 14c0 4-2.7 7-6 7s-6-3-6-7S9 3 12 3s6 7 6 11Z" />
+                <path d="M9 15c0 1.6 1 3 2.5 3" /></svg></span
+            ><span
+              >Huevos<span class="brand-second"
+                >Frescos<span class="brand-dot">.</span></span
+              ></span
+            ></a
+          >
+          <button
+            class="menu-toggle"
+            type="button"
+            aria-controls="main-menu"
+            aria-expanded="false"
+            aria-label="Abrir menú"
+          >
+            <span></span><span></span>
+          </button>
+          <nav
+            id="main-menu"
+            class="navbar-menu"
+            aria-label="Navegación principal"
+          >
+            <a href="/index.html">Inicio</a
+            ><a href="/beneficio.html">Nutrición y beneficios</a
+            ><a href="/index.html#despacho">Despacho</a
+            ><a href="/contacto.html">Contacto</a>
+          </nav>
+          <a class="button button-dark nav-order" href="/pedido.html"
+            >Hacer un pedido
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 12h16m-6-6 6 6-6 6" /></svg
+          ></a>
+        </div>
+      </header>
+    </div>
+    <main id="contenido">
+      <section class="container page-hero order-hero">
+        <p class="eyebrow">Del campo a tu cocina</p>
+        <h1>Tu próximo <em>buen pedido.</em></h1>
+        <p>
+          Elige tus formatos y déjanos tus datos. Luego te contactamos para
+          coordinar la entrega.
+        </p>
+      </section>
+      <div class="container order-layout">
+        <section class="order-form-card">
+          <form action="/api/pedidos" method="POST" id="pedidoForm">
+            <fieldset>
+              <legend><span>01</span> ¿Cuántos llevamos?</legend>
+              <p class="field-help">
+                Combina docenas y bandejas como prefieras.
+              </p>
+              <div class="quantity-row">
+                <div>
+                  <label for="docenas"
+                    >Docena <span>12 huevos · Tamaño Extra</span></label
+                  ><strong data-price="docenas">$2.640</strong>
+                </div>
+                <div class="quantity-wrap">
+                  <button
+                    type="button"
+                    data-qty="docenas"
+                    data-change="-1"
+                    aria-label="Quitar una docena"
+                  >
+                    −</button
+                  ><input
+                    type="number"
+                    id="docenas"
+                    name="🥚 Docenas"
+                    value="0"
+                    min="0"
+                    max="1000"
+                    step="1"
+                    required
+                    aria-label="Cantidad de docenas"
+                  /><button
+                    type="button"
+                    data-qty="docenas"
+                    data-change="1"
+                    aria-label="Agregar una docena"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div class="quantity-row">
+                <div>
+                  <label for="bandejas"
+                    >Bandeja <span>30 huevos · Tamaño Extra</span></label
+                  ><strong data-price="bandejas">$6.600</strong>
+                </div>
+                <div class="quantity-wrap">
+                  <button
+                    type="button"
+                    data-qty="bandejas"
+                    data-change="-1"
+                    aria-label="Quitar una bandeja"
+                  >
+                    −</button
+                  ><input
+                    type="number"
+                    id="bandejas"
+                    name="📦 Bandejas"
+                    value="0"
+                    min="0"
+                    max="1000"
+                    step="1"
+                    required
+                    aria-label="Cantidad de bandejas"
+                  /><button
+                    type="button"
+                    data-qty="bandejas"
+                    data-change="1"
+                    aria-label="Agregar una bandeja"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend><span>02</span> ¿A quién se lo llevamos?</legend>
+              <div class="field-grid">
+                <div class="field">
+                  <label for="nombre">Nombre completo</label
+                  ><input
+                    id="nombre"
+                    type="text"
+                    name="👤 Nombre completo"
+                    placeholder="Tu nombre y apellido"
+                    maxlength="120"
+                    autocomplete="name"
+                    required
+                  />
+                </div>
+                <div class="field">
+                  <label for="telefono">Teléfono de contacto</label
+                  ><input
+                    id="telefono"
+                    type="tel"
+                    name="📱 Teléfono"
+                    placeholder="Ej. +56 9 1234 5678"
+                    maxlength="30"
+                    autocomplete="tel"
+                    required
+                  />
+                </div>
+                <div class="field full">
+                  <label for="direccion">Dirección de entrega</label
+                  ><input
+                    id="direccion"
+                    type="text"
+                    name="📍 Dirección"
+                    placeholder="Calle, número, departamento o referencia"
+                    maxlength="300"
+                    autocomplete="street-address"
+                    required
+                  />
+                </div>
+                <div class="field full">
+                  <label for="horario"
+                    >Horario preferido <span>Opcional</span></label
+                  ><input
+                    id="horario"
+                    type="text"
+                    name="🕒 Horario preferido de entrega"
+                    placeholder="Ej. después de las 18:00"
+                    maxlength="200"
+                  />
+                  <p class="field-help">
+                    Te contactamos para confirmar el horario disponible.
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend><span>03</span> Últimos detalles</legend>
+              <div class="field">
+                <label for="pago">Método de pago</label
+                ><select id="pago" name="💳 Método de pago" required>
+                  <option value="">Selecciona una opción</option>
+                  <option value="Efectivo">Efectivo</option>
+                  <option value="Transferencia">Transferencia</option>
+                </select>
+              </div>
+              <div class="order-total">
+                <div>
+                  <span>Total de productos</span><small>Pesos chilenos</small>
+                </div>
+                <strong>$<span id="total">0</span></strong>
+              </div>
+              <div id="captcha"></div>
+              <p id="formStatus" role="status" aria-live="polite"></p>
+              <button
+                type="submit"
+                class="button button-yellow submit-button"
+                id="btnSubmit"
+                disabled
+              >
+                Enviar mi pedido
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M4 12h16m-6-6 6 6-6 6" />
+                </svg>
+              </button>
+              <p class="fine-print">
+                Usamos estos datos para gestionar tu pedido y coordinar la
+                entrega. El pedido se confirma contigo antes del despacho.
+              </p>
+            </fieldset>
+          </form>
+        </section>
+        <aside class="order-aside">
+          <span class="icon-box"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M3 6h11v11H3zM14 10h4l3 4v3h-7" />
+              <circle cx="7" cy="18" r="2" />
+              <circle cx="18" cy="18" r="2" /></svg
+          ></span>
+          <h2>De aquí a tu mesa.</h2>
+          <p>Despacho sin cargo adicional dentro de Concepción centro.</p>
+          <hr />
+          <h3>¿Estás en otro sector?</h3>
+          <p>Consulta la cobertura y el costo antes de enviar tu pedido.</p>
+          <a class="text-link" href="/contacto.html"
+            >Consultar despacho
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 12h16m-6-6 6 6-6 6" /></svg
+          ></a>
+          <hr />
+          <p>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m5 12 4 4L19 6" />
+            </svg>
+            Número de pedido al registrarlo
+          </p>
+          <p>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m5 12 4 4L19 6" />
+            </svg>
+            Coordinación de entrega contigo
+          </p>
+          <p>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m5 12 4 4L19 6" />
+            </svg>
+            Efectivo o transferencia
+          </p>
+        </aside>
+      </div>
+      <div id="overlay" hidden></div>
+      <div
+        id="pedidoConfirmado"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirmation-title"
+        tabindex="-1"
+        hidden
+      >
+        <span class="confirmation-icon"
+          ><svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m5 12 4 4L19 6" /></svg
+        ></span>
+        <h2 id="confirmation-title">¡Pedido recibido!</h2>
+        <p>
+          Quedó registrado. Te contactaremos para confirmar disponibilidad y
+          coordinar la entrega.
+        </p>
+        <p id="orderNumber"></p>
+        <div class="modal-actions">
+          <button id="nuevoPedido" class="button button-dark" type="button">
+            Nuevo pedido</button
+          ><button data-close-modal class="button button-outline" type="button">
+            Entendido
+          </button>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand" href="/"
+            ><span class="brand-mark"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M18 14c0 4-2.7 7-6 7s-6-3-6-7S9 3 12 3s6 7 6 11Z" />
+                <path d="M9 15c0 1.6 1 3 2.5 3" /></svg></span
+            ><span
+              >Huevos<span class="brand-second"
+                >Frescos<span class="brand-dot">.</span></span
+              ></span
+            ></a
+          >
+          <p>Lo simple sabe mejor.<br />Huevos frescos para tu día a día.</p>
+        </div>
+        <div>
+          <h2>Explora</h2>
+          <a href="/beneficio.html">Nutrición y beneficios</a
+          ><a href="/index.html#despacho">Despacho a domicilio</a
+          ><a href="/pedido.html">Hacer un pedido</a>
+        </div>
+        <div>
+          <h2>Estamos cerca</h2>
+          <p>Concepción, Chile.<br />Coordinamos tu entrega contigo.</p>
+          <a href="/contacto.html"
+            >Conversemos
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 12h16m-6-6 6 6-6 6" /></svg
+          ></a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>Huevos Frescos · Concepción</span
+        ><span>Hecho para compartir cosas buenas.</span>
+      </div>
+    </footer>
+  </body>
+</html>
