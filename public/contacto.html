@@ -1,167 +1,277 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contacto WhatsApp</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .contacto-container {
-      max-width: 400px;
-      margin: 60px auto;
-      width: 100%;
-    }
-
-    .contacto-card {
-      background: white;
-      border-radius: 32px;
-      padding: 40px 30px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-      text-align: center;
-      animation: fadeUp 0.6s ease;
-    }
-
-    .icon-wsp {
-      background: #25D366;
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 25px;
-      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
-    }
-
-    .icon-wsp svg {
-      width: 50px;
-      height: 50px;
-      fill: white;
-    }
-
-    .contacto-card h2 {
-      color: #1e2e3a;
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 15px;
-    }
-
-    .contacto-card p {
-      color: #5e6f7d;
-      font-size: 17px;
-      line-height: 1.5;
-      margin-bottom: 30px;
-      padding: 0 10px;
-    }
-
-    .btn-wsp {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: #25D366;
-      color: white;
-      text-decoration: none;
-      padding: 18px 25px;
-      border-radius: 60px;
-      font-size: 20px;
-      font-weight: 600;
-      transition: all 0.3s;
-      border: none;
-      width: 100%;
-      cursor: pointer;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 16px rgba(37, 211, 102, 0.3);
-    }
-
-    .btn-wsp:hover {
-      background: #20bd5a;
-      transform: scale(1.02);
-      box-shadow: 0 12px 24px rgba(37, 211, 102, 0.4);
-    }
-
-    .btn-wsp svg {
-      width: 24px;
-      height: 24px;
-      fill: white;
-    }
-
-    .mensaje-preview {
-      background: #f2f5f7;
-      padding: 16px;
-      border-radius: 16px;
-      color: #2c3e50;
-      font-size: 15px;
-      border-left: 4px solid #25D366;
-      text-align: left;
-      word-break: break-word;
-      margin-top: 10px;
-    }
-
-    .footer-contacto {
-      margin-top: 25px;
-      font-size: 13px;
-      color: #95a5a6;
-    }
-
-    /* Modo oscuro */
-    @media (prefers-color-scheme: dark) {
-      .contacto-card {
-        background: #2e2e2e;
-      }
-      .contacto-card h2 {
-        color: #f1f1f1;
-      }
-      .contacto-card p {
-        color: #b0b0b0;
-      }
-      .mensaje-preview {
-        background: #3a3a3a;
-        color: #f1f1f1;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div id="navbar-container"></div>
-
-  <div class="contacto-container">
-    <div class="contacto-card">
-
-      <!-- ÍCONO WHATSAPP -->
-      <div class="icon-wsp">
-        <svg viewBox="0 0 24 24">
-          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.91 2.75 15.79 3.86 17.33L2.06 21.87L6.73 20.11C8.23 21.08 9.97 21.63 11.79 21.63H11.83C17.29 21.63 21.74 17.18 21.74 11.72C21.74 6.26 17.5 2 12.04 2ZM12.04 20.15C10.44 20.15 8.87 19.68 7.5 18.8L7.19 18.61L4.48 19.52L5.4 16.88L5.2 16.56C4.25 15.13 3.74 13.5 3.74 11.8C3.74 7.31 7.45 3.6 11.94 3.6C16.43 3.6 20.14 7.31 20.14 11.8C20.14 16.29 16.53 20.15 12.04 20.15ZM16.36 13.86C16.09 13.73 14.97 13.18 14.72 13.09C14.47 13 14.29 12.95 14.11 13.22C13.93 13.5 13.41 14.19 13.25 14.37C13.09 14.55 12.93 14.57 12.66 14.44C11.31 13.85 10.45 13.39 9.58 12.18C9.3 11.79 9.86 11.82 10.3 10.96C10.39 10.79 10.34 10.65 10.27 10.52C10.2 10.39 9.78 9.26 9.62 8.86C9.46 8.46 9.3 8.5 9.14 8.5H8.56C8.3 8.5 7.91 8.6 7.58 9.02C7.25 9.44 6.45 10.41 6.45 12.39C6.45 14.37 7.97 16.29 8.21 16.59C8.45 16.89 10.3 19.19 13.22 19.19C15.23 19.19 16.13 17.99 16.41 17.41C16.69 16.83 16.69 16.33 16.62 16.21C16.55 16.09 16.44 16.02 16.36 13.86Z"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f7f5ec" />
+    <meta
+      name="description"
+      content="Consulta por WhatsApp la disponibilidad de huevos y el despacho en Concepción. Coordinamos contigo cada entrega."
+    />
+    <title>Contacto · Huevos Frescos</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/js/site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <div id="navbar-container">
+      <div class="announcement">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z" />
+          <circle cx="12" cy="10" r="2" />
         </svg>
+        Concepción centro <span>·</span> Despacho sin cargo adicional
       </div>
-
-      <!-- TÍTULO -->
-      <h2>Contáctanos</h2>
-
-      <!-- DESCRIPCIÓN -->
-      <p>¡Hola! Haz clic en el botón para enviarnos un mensaje directo por WhatsApp. Te responderemos a la brevedad.</p>
-
-      <!-- BOTÓN WHATSAPP -->
-      <a href="#" id="wspLink" class="btn-wsp">
-        <svg viewBox="0 0 24 24">
-          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.91 2.75 15.79 3.86 17.33L2.06 21.87L6.73 20.11C8.23 21.08 9.97 21.63 11.79 21.63H11.83C17.29 21.63 21.74 17.18 21.74 11.72C21.74 6.26 17.5 2 12.04 2Z"/>
-        </svg>
-        Enviar WhatsApp
-      </a>
-
-      <!-- VISTA PREVIA DEL MENSAJE -->
-      <div class="mensaje-preview" id="mensajePreview">
-        📝 Mensaje: "Hola, quiero información"
-      </div>
-
-      <div class="footer-contacto">
-        Tiempo de respuesta: ~5 minutos
-      </div>
-
+      <header class="site-header">
+        <div class="nav-wrap">
+          <a class="brand" href="/" aria-label="Huevos Frescos, inicio"
+            ><span class="brand-mark"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M18 14c0 4-2.7 7-6 7s-6-3-6-7S9 3 12 3s6 7 6 11Z" />
+                <path d="M9 15c0 1.6 1 3 2.5 3" /></svg></span
+            ><span
+              >Huevos<span class="brand-second"
+                >Frescos<span class="brand-dot">.</span></span
+              ></span
+            ></a
+          >
+          <button
+            class="menu-toggle"
+            type="button"
+            aria-controls="main-menu"
+            aria-expanded="false"
+            aria-label="Abrir menú"
+          >
+            <span></span><span></span>
+          </button>
+          <nav
+            id="main-menu"
+            class="navbar-menu"
+            aria-label="Navegación principal"
+          >
+            <a href="/index.html">Inicio</a
+            ><a href="/beneficio.html">Nutrición y beneficios</a
+            ><a href="/index.html#despacho">Despacho</a
+            ><a href="/contacto.html">Contacto</a>
+          </nav>
+          <a class="button button-dark nav-order" href="/pedido.html"
+            >Hacer un pedido
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 12h16m-6-6 6 6-6 6" /></svg
+          ></a>
+        </div>
+      </header>
     </div>
-  </div>
-
-  <script src="/js/contacto.js" defer></script>
-</body>
+    <main id="contenido">
+      <section class="container page-hero">
+        <p class="eyebrow">Estamos cerca</p>
+        <h1>Las buenas cosas<br /><em>empiezan conversando.</em></h1>
+        <p>
+          ¿Tienes una duda sobre tu pedido o el despacho? Escríbenos y
+          coordinamos los detalles contigo.
+        </p>
+      </section>
+      <section class="container contact-layout">
+        <article class="contact-card">
+          <span class="icon-box"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M20 5c-3-3-7-1-8 1-1-2-5-4-8-1-4 4 1 9 8 15 7-6 12-11 8-15Z"
+              /></svg
+          ></span>
+          <p class="eyebrow">Hablemos por WhatsApp</p>
+          <h2>Una conversación.<br />Todo más fácil.</h2>
+          <p>
+            Consulta disponibilidad, confirma la cobertura de tu sector o
+            cuéntanos qué necesitas.
+          </p>
+          <a
+            class="button button-dark"
+            href="https://wa.me/569977696527?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20huevos%20y%20el%20despacho"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Abrir WhatsApp
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 12h16m-6-6 6 6-6 6" /></svg
+          ></a>
+          <p class="fine-print">
+            Se abrirá WhatsApp con un mensaje para que lo revises y lo envíes.
+          </p>
+        </article>
+        <div class="contact-details">
+          <article>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z" />
+              <circle cx="12" cy="10" r="2" />
+            </svg>
+            <div>
+              <h2>Concepción centro</h2>
+              <p>
+                Despacho a domicilio sin cargo adicional dentro del centro. Para
+                otros sectores, consulta cobertura y costo.
+              </p>
+            </div>
+          </article>
+          <article>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3 2" />
+            </svg>
+            <div>
+              <h2>Coordinamos tu entrega</h2>
+              <p>
+                Indica tu horario preferido al pedir. Te contactamos para
+                confirmar disponibilidad y coordinar la entrega.
+              </p>
+            </div>
+          </article>
+          <article>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="m3 7 9-4 9 4-9 4-9-4Zm0 0v10l9 4 9-4V7M12 11v10M7 5l10 4"
+              />
+            </svg>
+            <div>
+              <h2>¿Ya sabes lo que quieres?</h2>
+              <p>
+                Pide docenas o bandejas, elige efectivo o transferencia y deja
+                tus datos en el formulario.
+              </p>
+              <a class="text-link" href="/pedido.html"
+                >Ir al formulario de pedidos
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M4 12h16m-6-6 6 6-6 6" /></svg
+              ></a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand" href="/"
+            ><span class="brand-mark"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M18 14c0 4-2.7 7-6 7s-6-3-6-7S9 3 12 3s6 7 6 11Z" />
+                <path d="M9 15c0 1.6 1 3 2.5 3" /></svg></span
+            ><span
+              >Huevos<span class="brand-second"
+                >Frescos<span class="brand-dot">.</span></span
+              ></span
+            ></a
+          >
+          <p>Lo simple sabe mejor.<br />Huevos frescos para tu día a día.</p>
+        </div>
+        <div>
+          <h2>Explora</h2>
+          <a href="/beneficio.html">Nutrición y beneficios</a
+          ><a href="/index.html#despacho">Despacho a domicilio</a
+          ><a href="/pedido.html">Hacer un pedido</a>
+        </div>
+        <div>
+          <h2>Estamos cerca</h2>
+          <p>Concepción, Chile.<br />Coordinamos tu entrega contigo.</p>
+          <a href="/contacto.html"
+            >Conversemos
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 12h16m-6-6 6 6-6 6" /></svg
+          ></a>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>Huevos Frescos · Concepción</span
+        ><span>Hecho para compartir cosas buenas.</span>
+      </div>
+    </footer>
+  </body>
 </html>
